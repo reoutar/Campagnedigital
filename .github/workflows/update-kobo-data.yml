@@ -18,7 +18,7 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Appeler l'API KoboToolbox et générer data_oranger.json
+      - name: Télécharger les données Kobo
         env:
           KOBOTOOLBOX_TOKEN: ${{ secrets.KOBOTOOLBOX_TOKEN }}
         run: |
@@ -28,40 +28,42 @@ jobs:
           curl -s -H "Authorization: Token ${KOBOTOOLBOX_TOKEN}" \
                -H "Accept: application/json" \
                "https://kf.kobotoolbox.org/api/v2/assets/aRQuqSAatFk3vTpByCf9hN/data/?format=json" \
-               > raw_kobo.json
+               -o raw_kobo.json
 
           echo "Réponse sauvegardée dans raw_kobo.json"
 
-          python - << 'EOF'
-import json
-import pathlib
+      - name: Générer data_oranger.json
+        shell: python
+        run: |
+          import json
+          from pathlib import Path
 
-raw_path = pathlib.Path("raw_kobo.json")
-if not raw_path.exists():
-    raise SystemExit("raw_kobo.json introuvable après l'appel API.")
+          raw_path = Path("raw_kobo.json")
+          if not raw_path.exists():
+              raise SystemExit("raw_kobo.json introuvable après l'appel API.")
 
-data = json.loads(raw_path.read_text(encoding="utf-8"))
+          data = json.loads(raw_path.read_text(encoding="utf-8"))
 
-results = data.get("results", [])
+          # Kobo v2: { count, next, previous, results: [...] }
+          results = data.get("results", [])
 
-records = []
-for r in results:
-    records.append({
-        "_id": r.get("_id"),
-        "stickers": r.get("stickers", ""),
-        "province": r.get("province", ""),
-        "Engagement_sexe": r.get("Engagement_sexe") or r.get("engagement_sexe") or "",
-        "_submission_time": r.get("_submission_time") or r.get("_submitted_at") or "",
-    })
+          records = []
+          for r in results:
+              records.append({
+                  "_id": r.get("_id"),
+                  "stickers": r.get("stickers", ""),
+                  "province": r.get("province", ""),
+                  "Engagement_sexe": r.get("Engagement_sexe") or r.get("engagement_sexe") or "",
+                  "_submission_time": r.get("_submission_time") or r.get("_submitted_at") or "",
+              })
 
-out_path = pathlib.Path("data_oranger.json")
-out_path.write_text(
-    json.dumps(records, ensure_ascii=False, indent=2),
-    encoding="utf-8"
-)
+          out_path = Path("data_oranger.json")
+          out_path.write_text(
+              json.dumps(records, ensure_ascii=False, indent=2),
+              encoding="utf-8"
+          )
 
-print(f"Wrote {len(records)} records to {out_path}")
-EOF
+          print(f"Wrote {len(records)} records to {out_path}")
 
       - name: Vérifier s'il y a des changements
         id: gitdiff
