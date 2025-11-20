@@ -67,7 +67,7 @@ jobs:
           print(f"Wrote {len(records)} records to {out_path}")
           EOF
 
-      - name: Vérifier s'il y a des changements
+           - name: Vérifier s'il y a des changements
         id: gitdiff
         run: |
           if git status --porcelain | grep -q "data_oranger.json"; then
@@ -83,13 +83,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # Sécuriser : s'assurer qu'on est bien sur la branche par défaut
-          CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-          echo "Branche courante: $CURRENT_BRANCH"
-
-          # (Optionnel) récupérer les derniers changements du remote
-          git pull --rebase origin "$CURRENT_BRANCH" || true
-
           git add data_oranger.json raw_kobo.json
-          git commit -m "Auto-update data_oranger.json from Kobo" || true
-          git push origin "$CURRENT_BRANCH"
+          git commit -m "Auto-update data_oranger.json from Kobo" || echo "Rien à committer"
+          git push origin "$(git rev-parse --abbrev-ref HEAD)"
+
