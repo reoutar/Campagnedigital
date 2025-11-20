@@ -322,27 +322,33 @@
     let expandedData = [];
 
     async function loadData() {
-      try {
-        const resp = await fetch("data_oranger.json?_t=" + Date.now());
-        if (!resp.ok) {
-          throw new Error("HTTP " + resp.status);
-        }
-        const json = await resp.json();
+  try {
+    const resp = await fetch(
+      "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/data_oranger.json?nocache=" + Date.now()
+    );
 
-        // Accepte soit un tableau direct, soit un objet avec .results (export Kobo brut)
-        const rows = Array.isArray(json) ? json : (json.results || []);
-        prepareData(rows);
-        renderWall();
-      } catch (e) {
-        console.error("Erreur chargement data_oranger.json:", e);
-        wallGrid.innerHTML = `
-          <div style="grid-column: 1 / -1; font-size: 12px; color: #fca5a5;">
-            ⚠️ Erreur lors du chargement des données.<br/>
-            Vérifiez que <code>data_oranger.json</code> existe bien à la racine du repo et contient un JSON valide.
-          </div>
-        `;
-      }
+    if (!resp.ok) {
+      throw new Error("HTTP " + resp.status);
     }
+
+    const json = await resp.json();
+
+    // Tableau direct ou objet Kobo avec .results
+    const rows = Array.isArray(json) ? json : (json.results || []);
+
+    prepareData(rows);
+    renderWall();
+  } catch (e) {
+    console.error("Erreur chargement data_oranger.json:", e);
+    wallGrid.innerHTML = `
+      <div style="grid-column: 1 / -1; font-size: 12px; color: #fca5a5;">
+        ⚠️ Erreur lors du chargement des données.<br/>
+        Vérifiez que <code>data_oranger.json</code> existe bien dans le repo GitHub ET que le workflow l’a mis à jour.
+      </div>
+    `;
+  }
+}
+
 
     function prepareData(rows) {
       expandedData = [];
