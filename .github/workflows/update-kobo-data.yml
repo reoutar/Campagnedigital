@@ -1,0 +1,82 @@
+name: Mettre à jour les données Kobo pour le mur digital
+
+on:
+  schedule:
+    # Toutes les heures (UTC)
+    - cron: "0 * * * *"
+  workflow_dispatch: {} # Permet de lancer manuellement
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Installer Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Appeler l'API KoboToolbox et générer data_oranger.json
+        env:
+          KOBOTOOLBOX_TOKEN: ${{ secrets.KOBOTOOLBOX_TOKEN }}
+        run: |
+          echo "Appel de l'API KoboToolbox..."
+
+          # Appel de l'API /data/ pour ton formulaire
+          curl -s -H "Authorization: Token ${KOBOTOOLBOX_TOKEN}" \
+               -H "Accept: application/json" \
+               "https://kf.kobotoolbox.org/api/v2/assets/aRQuqSAatFk3vTpByCf9hN/data/?format=json" \
+               > raw_kobo.json
+
+          echo "Réponse sauvegardée dans raw_kobo.json"
+
+          python << 'EOF'
+import json
+from pathlib import Path
+
+raw_path = Path("raw_kobo.json")
+if not raw_path.exists():
+    raise SystemExit("raw_kobo.json introuvable après l'appel API.")
+
+with raw_path.open("r", encoding="utf-8") as f:
+    data = json.load(f)
+
+# Kobo v2: { count, next, previous, results: [...] }
+results = data.get("results", [])
+
+# Option : ne garder que certaines colonnes pour le mur
+records = []
+for r in results:
+    records.append({
+        "_id": r.get("_id"),
+        "stickers": r.get("stickers", ""),
+        "province": r.get("province", ""),
+        "Engagement_sexe": r.get("Engagement_sexe") or r.get("engagement_sexe") or "",
+        "_submission_time": r.get("_submission_time") or r.get("_submitted_at") or ""
+    })
+
+out_path = Path("data_oranger.json")
+with out_path.open("w", encoding="utf-8") as f:
+    json.dump(records, f, ensure_ascii=False, indent=2)
+
+print(f"data_oranger.json généré avec {len(records)} enregistrements")
+EOF
+
+      - name: Configurer Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Commit et push si modifications
+        run: |
+          if git status --porcelain | grep -E "data_oranger.json|raw_kobo.json"; then
+            echo "Changements détectés, commit en cours..."
+            git add data_oranger.json raw_kobo.json
+            git commit -m "Mise à jour automatique des données Kobo pour le mur digital"
+            git push
+          else
+            echo "Aucun changement dans data_oranger.json (pas de commit)."
+          fi
