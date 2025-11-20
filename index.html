@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mur Digital – #OrangerLaRDC</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root {
+      --orange: #f58220;
+      --orange-neon: #ffb347;
+      --blue-onu: #0b3b70;
+      --bg: #020617;
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+      --radius-xl: 22px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.25), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.18), transparent 60%),
+        linear-gradient(135deg, #020617, #020817);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    /* HEADER */
+    .header {
+      background:
+        radial-gradient(circle at top left, rgba(248, 250, 252, 0.16), transparent 60%),
+        linear-gradient(120deg, #f97316, #facc15);
+      color: white;
+      padding: 16px 20px;
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(254, 243, 199, 0.8);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .header-sub {
+      font-size: 13px;
+    }
+
+    .header-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+    }
+
+    .tag {
+      background: rgba(0, 0, 0, 0.22);
+      border-radius: 999px;
+      padding: 3px 9px;
+      font-size: 11px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border: 1px solid rgba(254, 249, 195, 0.6);
+    }
+
+    .tag-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 9px rgba(34, 197, 94, 0.8);
+    }
+
+    /* INFOS */
+
+    .info {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* WALL */
+
+    .wall-card {
+      background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.16), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.14), transparent 60%),
+        linear-gradient(150deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
+      border-radius: var(--radius-xl);
+      padding: 12px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wall-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+      gap: 6px;
+    }
+
+    .wall-title {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .wall-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .wall-counter {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .wall-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    @media (max-width: 1024px) {
+      .wall-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .wall-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 480px) {
+      .wall-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .tile {
+      background:
+        radial-gradient(circle at top, rgba(248, 250, 252, 0.16), rgba(15, 23, 42, 0.96));
+      border-radius: 18px;
+      padding: 8px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 16px rgba(15, 23, 42, 0.9);
+    }
+
+    .tile-badge {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: rgba(2, 6, 23, 0.9);
+      padding: 2px 7px;
+      border-radius: 999px;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      border: 1px solid rgba(248, 250, 252, 0.18);
+    }
+
+    .badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--orange);
+      box-shadow: 0 0 9px rgba(245, 130, 32, 0.9);
+    }
+
+    .tile-image-wrap {
+      border-radius: 14px;
+      overflow: hidden;
+      background: #020617;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(31, 41, 55, 0.9);
+    }
+
+    .tile-image {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .tile-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 6px;
+    }
+
+    .tile-province {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .tile-sex {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .tile-time {
+      font-size: 9px;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .footer-note {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 6px;
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-title">MUR DIGITAL – #ORANGERLARDC</div>
+      <div class="header-sub">
+        Engagements citoyens contre les violences faites aux femmes et aux filles · 16 jours d’activisme
+      </div>
+      <div class="header-tags">
+        <span class="tag">
+          <span class="tag-dot"></span>
+          #Jem'engage
+        </span>
+        <span class="tag">
+          <span class="tag-dot"></span>
+          #NonViolences
+        </span>
+        <span class="tag">
+          <span class="tag-dot"></span>
+          #PasD'Excuse
+        </span>
+      </div>
+    </header>
+
+    <div class="info">
+      Les vignettes ci-dessous sont générées à partir du fichier <code>data_oranger.json</code> à la racine du dépôt GitHub.
+      Pour mettre à jour le mur, remplacez ce fichier par un export récent de Kobo (ou un JSON adapté).
+    </div>
+
+    <!-- WALL -->
+    <section class="wall-card">
+      <div class="wall-header-row">
+        <div>
+          <div class="wall-title">Mur des engagements</div>
+          <div class="wall-sub">
+            Chaque vignette représente un visuel d’engagement soumis via le formulaire Kobo.
+          </div>
+        </div>
+        <div class="wall-counter">
+          <span id="wall-count">0</span> vignettes affichées
+        </div>
+      </div>
+
+      <div id="wall-grid" class="wall-grid">
+        <!-- Tiles générées en JS -->
+      </div>
+    </section>
+
+    <div class="footer-note">
+      Ce mur digital valorise les engagements soumis via votre formulaire Kobo. Merci pour votre mobilisation.
+    </div>
+  </div>
+
+  <script>
+    // URL des images des stickers (sur ton repo GitHub)
+    const STICKER_IMAGES = {
+      "jemengage": "https://raw.githubusercontent.com/reoutar/oranger-mur-digital/main/images/Jemengage.png",
+      "nonviolences": "https://raw.githubusercontent.com/reoutar/oranger-mur-digital/main/images/NonViolence.png",
+      "pasdexcuse": "https://raw.githubusercontent.com/reoutar/oranger-mur-digital/main/images/PasExcuse.png"
+    };
+
+    const STICKER_LABELS = {
+      "jemengage": "#Jem'engage",
+      "nonviolences": "#NonViolences",
+      "pasdexcuse": "#PasD'Excuse"
+    };
+
+    const wallGrid = document.getElementById("wall-grid");
+    const wallCount = document.getElementById("wall-count");
+
+    let expandedData = [];
+
+    async function loadData() {
+      try {
+        const resp = await fetch("data_oranger.json?_t=" + Date.now());
+        if (!resp.ok) {
+          throw new Error("HTTP " + resp.status);
+        }
+        const json = await resp.json();
+
+        // Accepte soit un tableau direct, soit un objet avec .results (export Kobo brut)
+        const rows = Array.isArray(json) ? json : (json.results || []);
+        prepareData(rows);
+        renderWall();
+      } catch (e) {
+        console.error("Erreur chargement data_oranger.json:", e);
+        wallGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; font-size: 12px; color: #fca5a5;">
+            ⚠️ Erreur lors du chargement des données.<br/>
+            Vérifiez que <code>data_oranger.json</code> existe bien à la racine du repo et contient un JSON valide.
+          </div>
+        `;
+      }
+    }
+
+    function prepareData(rows) {
+      expandedData = [];
+
+      for (const row of rows) {
+        const stickersRaw = (row.stickers || "").trim();
+        if (!stickersRaw) continue;
+
+        const province = row.province || "";
+        const sexe =
+          row.Engagement_sexe ||
+          row.engagement_sexe ||
+          row["Mon_engagement_contre_les_violences_en_tant_que"] ||
+          row.sexe ||
+          "";
+
+        const submission_time = row._submission_time || row._submitted_at || "";
+
+        const splitStickers = stickersRaw.split(/\s+/g);
+        for (const s of splitStickers) {
+          const code = s.toLowerCase();
+          if (!code) continue;
+
+          expandedData.push({
+            _id: row._id,
+            sticker: code,
+            province: province,
+            sexe: sexe,
+            submission_time: submission_time
+          });
+        }
+      }
+
+      expandedData.sort((a, b) => {
+        if (!a.submission_time || !b.submission_time) return 0;
+        return a.submission_time < b.submission_time ? 1 : -1;
+      });
+    }
+
+    function formatShortDate(str) {
+      if (!str) return "";
+      const d = new Date(str);
+      if (isNaN(d)) return "";
+      return d.toLocaleDateString("fr-FR", {
+        day: "2-digit",
+        month: "2-digit"
+      });
+    }
+
+    function renderWall() {
+      wallCount.textContent = expandedData.length.toString();
+
+      if (expandedData.length === 0) {
+        wallGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; font-size: 12px; color: #e5e7eb;">
+            Aucun engagement n'est encore disponible dans <code>data_oranger.json</code>.
+          </div>
+        `;
+        return;
+      }
+
+      wallGrid.innerHTML = "";
+
+      for (const row of expandedData) {
+        const stickerCode = row.sticker;
+        const imgSrc = STICKER_IMAGES[stickerCode] || "";
+        const label = STICKER_LABELS[stickerCode] || stickerCode;
+
+        const tile = document.createElement("article");
+        tile.className = "tile";
+
+        const badge = document.createElement("div");
+        badge.className = "tile-badge";
+        badge.innerHTML = `<span class="badge-dot"></span><span>${label}</span>`;
+        tile.appendChild(badge);
+
+        const imgWrap = document.createElement("div");
+        imgWrap.className = "tile-image-wrap";
+
+        if (imgSrc) {
+          const img = document.createElement("img");
+          img.className = "tile-image";
+          img.src = imgSrc;
+          img.alt = label;
+          imgWrap.appendChild(img);
+        } else {
+          imgWrap.innerHTML = `<div style="font-size:11px; color:#6b7280; padding:8px; text-align:center;">
+            ${label}
+          </div>`;
+        }
+
+        tile.appendChild(imgWrap);
+
+        const meta = document.createElement("div");
+        meta.className = "tile-meta";
+
+        const left = document.createElement("div");
+        left.innerHTML = `
+          <div class="tile-province">${row.province || "Province inconnue"}</div>
+          <div class="tile-sex">${row.sexe || "&nbsp;"}</div>
+        `;
+
+        const right = document.createElement("div");
+        right.className = "tile-time";
+        right.textContent = formatShortDate(row.submission_time);
+
+        meta.appendChild(left);
+        meta.appendChild(right);
+        tile.appendChild(meta);
+
+        wallGrid.appendChild(tile);
+      }
+    }
+
+    loadData();
+  </script>
+</body>
+</html>
