@@ -2,9 +2,8 @@ name: Mettre à jour les données Kobo pour le mur digital
 
 on:
   schedule:
-    # Toutes les heures (UTC)
-    - cron: "0 * * * *"
-  workflow_dispatch: {}  # Permet de lancer manuellement
+    - cron: "0 * * * *"   # Toutes les heures (UTC)
+  workflow_dispatch: {}   # Lancement manuel
 
 jobs:
   update-data:
@@ -24,10 +23,8 @@ jobs:
           KOBOTOOLBOX_TOKEN: ${{ secrets.KOBOTOOLBOX_TOKEN }}
         run: |
           set -e
-
           echo "Appel de l'API KoboToolbox..."
 
-          # Appel de l'API /data/ pour ton formulaire
           curl -s -H "Authorization: Token ${KOBOTOOLBOX_TOKEN}" \
                -H "Accept: application/json" \
                "https://kf.kobotoolbox.org/api/v2/assets/aRQuqSAatFk3vTpByCf9hN/data/?format=json" \
@@ -36,38 +33,37 @@ jobs:
           echo "Réponse sauvegardée dans raw_kobo.json"
 
           python - << 'EOF'
-          import json
-          import pathlib
+import json
+import pathlib
 
-          raw_path = pathlib.Path("raw_kobo.json")
-          if not raw_path.exists():
-              raise SystemExit("raw_kobo.json introuvable après l'appel API.")
+raw_path = pathlib.Path("raw_kobo.json")
+if not raw_path.exists():
+    raise SystemExit("raw_kobo.json introuvable après l'appel API.")
 
-          data = json.loads(raw_path.read_text(encoding="utf-8"))
+data = json.loads(raw_path.read_text(encoding="utf-8"))
 
-          # Kobo v2: { count, next, previous, results: [...] }
-          results = data.get("results", [])
+results = data.get("results", [])
 
-          records = []
-          for r in results:
-              records.append({
-                  "_id": r.get("_id"),
-                  "stickers": r.get("stickers", ""),
-                  "province": r.get("province", ""),
-                  "Engagement_sexe": r.get("Engagement_sexe") or r.get("engagement_sexe") or "",
-                  "_submission_time": r.get("_submission_time") or r.get("_submitted_at") or "",
-              })
+records = []
+for r in results:
+    records.append({
+        "_id": r.get("_id"),
+        "stickers": r.get("stickers", ""),
+        "province": r.get("province", ""),
+        "Engagement_sexe": r.get("Engagement_sexe") or r.get("engagement_sexe") or "",
+        "_submission_time": r.get("_submission_time") or r.get("_submitted_at") or "",
+    })
 
-          out_path = pathlib.Path("data_oranger.json")
-          out_path.write_text(
-              json.dumps(records, ensure_ascii=False, indent=2),
-              encoding="utf-8"
-          )
+out_path = pathlib.Path("data_oranger.json")
+out_path.write_text(
+    json.dumps(records, ensure_ascii=False, indent=2),
+    encoding="utf-8"
+)
 
-          print(f"Wrote {len(records)} records to {out_path}")
-          EOF
+print(f"Wrote {len(records)} records to {out_path}")
+EOF
 
-           - name: Vérifier s'il y a des changements
+      - name: Vérifier s'il y a des changements
         id: gitdiff
         run: |
           if git status --porcelain | grep -q "data_oranger.json"; then
@@ -86,4 +82,3 @@ jobs:
           git add data_oranger.json raw_kobo.json
           git commit -m "Auto-update data_oranger.json from Kobo" || echo "Rien à committer"
           git push origin "$(git rev-parse --abbrev-ref HEAD)"
-
