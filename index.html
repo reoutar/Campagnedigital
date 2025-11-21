@@ -303,188 +303,199 @@
   </div>
 
   <script>
-    // URL des images des stickers (sur ton repo GitHub)
-    const STICKER_IMAGES = {
-      "jemengage": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/Jemengage.png",
-      "nonviolences": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/NonViolence.png",
-      "pasdexcuse": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/PasExcuse.png"
-    };
+  // URL des images des stickers (sur ton repo GitHub)
+  const STICKER_IMAGES = {
+    "jemengage": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/Jemengage.png",
+    "nonviolences": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/NonViolence.png",
+    "pasdexcuse": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/PasExcuse.png"
+  };
 
-    const STICKER_LABELS = {
-      "jemengage": "#Jem'engage",
-      "nonviolences": "#NonViolences",
-      "pasdexcuse": "#PasD'Excuse"
-    };
+  const STICKER_LABELS = {
+    "jemengage": "#Jem'engage",
+    "nonviolences": "#NonViolences",
+    "pasdexcuse": "#PasD'Excuse"
+  };
 
-    const wallGrid = document.getElementById("wall-grid");
-    const wallCount = document.getElementById("wall-count");
+  const wallGrid = document.getElementById("wall-grid");
+  const wallCount = document.getElementById("wall-count");
 
-    let expandedData = [];
+  let expandedData = [];
 
-    // 🔍 Détection automatique de la colonne qui contient jemengage / nonviolences / pasdexcuse
-    function detectStickersString(row) {
-      // 1. Si une colonne "stickers" existe, on la prend en priorité
-      if (typeof row.stickers === "string" && row.stickers.trim() !== "") {
-        return row.stickers.trim();
+  async function loadData() {
+    try {
+      // Chargement direct depuis le JSON brut GitHub (toujours à jour après le workflow)
+      const resp = await fetch(
+        "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/data_oranger.json?nocache=" + Date.now()
+      );
+
+      if (!resp.ok) {
+        throw new Error("HTTP " + resp.status);
       }
 
-      // 2. Sinon on cherche dans les autres colonnes
-      const regex = /(jemengage|nonviolences|pasdexcuse)/i;
+      const json = await resp.json();
 
-      for (const [key, value] of Object.entries(row)) {
-        if (typeof value === "string" && regex.test(value)) {
-          return value.trim();
+      // Accepte soit un tableau direct, soit un objet avec .results (export Kobo brut)
+      const rows = Array.isArray(json) ? json : (json.results || []);
+      prepareData(rows);
+      renderWall();
+    } catch (e) {
+      console.error("Erreur chargement data_oranger.json:", e);
+      wallGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; font-size: 12px; color: #fca5a5;">
+          ⚠️ Erreur lors du chargement des données.<br/>
+          Vérifiez que <code>data_oranger.json</code> existe bien dans le dépôt et contient un JSON valide.
+        </div>
+      `;
+    }
+  }
+
+  function prepareData(rows) {
+    expandedData = [];
+
+    for (const row of rows) {
+      let raw = row.stickers;
+      let codesList = [];
+
+      // 1) Si c'est déjà un tableau
+      if (Array.isArray(raw)) {
+        codesList = raw;
+      }
+      // 2) Si c'est une chaîne de texte ("jemengage pasdexcuse nonviolences")
+      else if (typeof raw === "string") {
+        raw = raw.trim();
+        if (raw) {
+          codesList = raw.split(/\s+/g);
+        }
+      }
+      // 3) Autre type (nombre, objet...) -> on tente une conversion en string
+      else if (raw != null) {
+        const s = String(raw).trim();
+        if (s) {
+          codesList = s.split(/\s+/g);
         }
       }
 
-      // 3. Rien trouvé
-      return "";
-    }
-
-    async function loadData() {
-      try {
-        // Chargement direct depuis le JSON brut GitHub (toujours à jour après le workflow)
-        const resp = await fetch(
-          "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/data_oranger.json?nocache=" + Date.now()
-        );
-
-        if (!resp.ok) {
-          throw new Error("HTTP " + resp.status);
-        }
-
-        const json = await resp.json();
-
-        // Accepte soit un tableau direct, soit un objet avec .results (export Kobo brut)
-        const rows = Array.isArray(json) ? json : (json.results || []);
-        prepareData(rows);
-        renderWall();
-      } catch (e) {
-        console.error("Erreur chargement data_oranger.json:", e);
-        wallGrid.innerHTML = `
-          <div style="grid-column: 1 / -1; font-size: 12px; color: #fca5a5;">
-            ⚠️ Erreur lors du chargement des données.<br/>
-            Vérifiez que <code>data_oranger.json</code> existe bien dans le dépôt et contient un JSON valide.
-          </div>
-        `;
-      }
-    }
-
-    function prepareData(rows) {
-      expandedData = [];
-
-      for (const row of rows) {
-        // ➜ utilise la détection automatique
-        const stickersRaw = detectStickersString(row);
-        if (!stickersRaw) continue;
-
-        const province = row.province || "";
-        const sexe =
-          row.Engagement_sexe ||
-          row.engagement_sexe ||
-          row["Mon_engagement_contre_les_violences_en_tant_que"] ||
-          row.sexe ||
-          "";
-
-        const submission_time = row._submission_time || row._submitted_at || "";
-
-        const splitStickers = stickersRaw.split(/\s+/g);
-        for (const s of splitStickers) {
-          const code = s.toLowerCase();
-          if (!code) continue;
-
-          expandedData.push({
-            _id: row._id,
-            sticker: code,
-            province: province,
-            sexe: sexe,
-            submission_time: submission_time
-          });
+      // 4) Si on n'a rien trouvé dans stickers, on essaie de deviner
+      if (!codesList.length) {
+        for (const v of Object.values(row)) {
+          if (typeof v === "string" && /(jemengage|nonviolences|pasdexcuse)/i.test(v)) {
+            codesList = v.trim().split(/\s+/g);
+            break;
+          }
         }
       }
 
-      // Trier par date décroissante
-      expandedData.sort((a, b) => {
-        if (!a.submission_time || !b.submission_time) return 0;
-        return a.submission_time < b.submission_time ? 1 : -1;
-      });
-    }
+      if (!codesList.length) continue;
 
-    function formatShortDate(str) {
-      if (!str) return "";
-      const d = new Date(str);
-      if (isNaN(d)) return "";
-      return d.toLocaleDateString("fr-FR", {
-        day: "2-digit",
-        month: "2-digit"
-      });
-    }
+      const province = row.province || "";
+      const sexe =
+        row.Engagement_sexe ||
+        row.engagement_sexe ||
+        row["Mon_engagement_contr_iolences_en_tant_que"] ||
+        row["Mon_engagement_contre_les_violences_en_tant_que"] ||
+        row.sexe ||
+        "";
 
-    function renderWall() {
-      wallCount.textContent = expandedData.length.toString();
+      const submission_time = row._submission_time || row._submitted_at || "";
 
-      if (expandedData.length === 0) {
-        wallGrid.innerHTML = `
-          <div style="grid-column: 1 / -1; font-size: 12px; color: #e5e7eb;">
-            Aucun engagement n'est encore disponible dans <code>data_oranger.json</code>.
-          </div>
-        `;
-        return;
-      }
+      for (const s of codesList) {
+        const code = String(s).toLowerCase();
+        if (!code) continue;
 
-      wallGrid.innerHTML = "";
-
-      for (const row of expandedData) {
-        const stickerCode = row.sticker;
-        const imgSrc = STICKER_IMAGES[stickerCode] || "";
-        const label = STICKER_LABELS[stickerCode] || stickerCode;
-
-        const tile = document.createElement("article");
-        tile.className = "tile";
-
-        const badge = document.createElement("div");
-        badge.className = "tile-badge";
-        badge.innerHTML = `<span class="badge-dot"></span><span>${label}</span>`;
-        tile.appendChild(badge);
-
-        const imgWrap = document.createElement("div");
-        imgWrap.className = "tile-image-wrap";
-
-        if (imgSrc) {
-          const img = document.createElement("img");
-          img.className = "tile-image";
-          img.src = imgSrc;
-          img.alt = label;
-          imgWrap.appendChild(img);
-        } else {
-          imgWrap.innerHTML = `<div style="font-size:11px; color:#6b7280; padding:8px; text-align:center;">
-            ${label}
-          </div>`;
-        }
-
-        tile.appendChild(imgWrap);
-
-        const meta = document.createElement("div");
-        meta.className = "tile-meta";
-
-        const left = document.createElement("div");
-        left.innerHTML = `
-          <div class="tile-province">${row.province || "Province inconnue"}</div>
-          <div class="tile-sex">${row.sexe || "&nbsp;"}</div>
-        `;
-
-        const right = document.createElement("div");
-        right.className = "tile-time";
-        right.textContent = formatShortDate(row.submission_time);
-
-        meta.appendChild(left);
-        meta.appendChild(right);
-        tile.appendChild(meta);
-
-        wallGrid.appendChild(tile);
+        expandedData.push({
+          _id: row._id,
+          sticker: code,
+          province: province,
+          sexe: sexe,
+          submission_time: submission_time
+        });
       }
     }
 
-    loadData();
-  </script>
+    // Trier par date décroissante
+    expandedData.sort((a, b) => {
+      if (!a.submission_time || !b.submission_time) return 0;
+      return a.submission_time < b.submission_time ? 1 : -1;
+    });
+  }
+
+  function formatShortDate(str) {
+    if (!str) return "";
+    const d = new Date(str);
+    if (isNaN(d)) return "";
+    return d.toLocaleDateString("fr-FR", {
+      day: "2-digit",
+      month: "2-digit"
+    });
+  }
+
+  function renderWall() {
+    wallCount.textContent = expandedData.length.toString();
+
+    if (expandedData.length === 0) {
+      wallGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; font-size: 12px; color: #e5e7eb;">
+          Aucun engagement n'est encore disponible dans <code>data_oranger.json</code>.
+        </div>
+      `;
+      return;
+    }
+
+    wallGrid.innerHTML = "";
+
+    for (const row of expandedData) {
+      const stickerCode = row.sticker;
+      const imgSrc = STICKER_IMAGES[stickerCode] || "";
+      const label = STICKER_LABELS[stickerCode] || stickerCode;
+
+      const tile = document.createElement("article");
+      tile.className = "tile";
+
+      const badge = document.createElement("div");
+      badge.className = "tile-badge";
+      badge.innerHTML = `<span class="badge-dot"></span><span>${label}</span>`;
+      tile.appendChild(badge);
+
+      const imgWrap = document.createElement("div");
+      imgWrap.className = "tile-image-wrap";
+
+      if (imgSrc) {
+        const img = document.createElement("img");
+        img.className = "tile-image";
+        img.src = imgSrc;
+        img.alt = label;
+        imgWrap.appendChild(img);
+      } else {
+        imgWrap.innerHTML = `<div style="font-size:11px; color:#6b7280; padding:8px; text-align:center;">
+          ${label}
+        </div>`;
+      }
+
+      tile.appendChild(imgWrap);
+
+      const meta = document.createElement("div");
+      meta.className = "tile-meta";
+
+      const left = document.createElement("div");
+      left.innerHTML = `
+        <div class="tile-province">${row.province || "Province inconnue"}</div>
+        <div class="tile-sex">${row.sexe || "&nbsp;"}</div>
+      `;
+
+      const right = document.createElement("div");
+      right.className = "tile-time";
+      right.textContent = formatShortDate(row.submission_time);
+
+      meta.appendChild(left);
+      meta.appendChild(right);
+      tile.appendChild(meta);
+
+      wallGrid.appendChild(tile);
+    }
+  }
+
+  loadData();
+</script>
+
 </body>
 </html>
