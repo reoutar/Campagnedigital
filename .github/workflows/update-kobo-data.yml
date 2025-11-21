@@ -27,7 +27,7 @@ jobs:
 
           curl -s -H "Authorization: Token ${KOBOTOOLBOX_TOKEN}" \
                -H "Accept: application/json" \
-               "https://kf.kobotoolbox.org/api/v2/assets/aRQuqSAatFk3vTpByCf9hN/data/?format=json" \
+               "https://kf.kobotoolbox.org/api/v2/assets/aQL229knhzDHyFjHkrJKax/data/?format=json" \
                -o raw_kobo.json
 
           echo "Réponse sauvegardée dans raw_kobo.json"
