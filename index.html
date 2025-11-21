@@ -8,13 +8,16 @@
   <style>
     :root {
       --orange: #f58220;
+      --orange-soft: #ffd2a3;
       --orange-neon: #ffb347;
       --blue-onu: #0b3b70;
+      --blue-deep: #020617;
       --bg: #020617;
       --text-main: #f9fafb;
       --text-muted: #9ca3af;
       --radius-xl: 22px;
       --radius-md: 16px;
+      --radius-sm: 12px;
     }
 
     * {
@@ -25,9 +28,9 @@
       margin: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(59, 130, 246, 0.25), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.18), transparent 60%),
-        linear-gradient(135deg, #020617, #020817);
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.22), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.22), transparent 60%),
+        linear-gradient(135deg, #020617, #020818);
       color: var(--text-main);
       min-height: 100vh;
     }
@@ -50,7 +53,7 @@
       display: flex;
       flex-direction: column;
       gap: 6px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       position: relative;
       overflow: hidden;
     }
@@ -92,25 +95,149 @@
       box-shadow: 0 0 9px rgba(34, 197, 94, 0.8);
     }
 
-    /* INFOS */
-
+    /* INFO */
     .info {
       font-size: 11px;
       color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    /* KPI BAR */
+    .kpi-bar {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
       margin-bottom: 12px;
     }
 
-    /* WALL */
+    @media (max-width: 768px) {
+      .kpi-bar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
 
+    .kpi-card {
+      background:
+        radial-gradient(circle at top left, rgba(248, 250, 252, 0.06), transparent 60%),
+        linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(15, 23, 42, 0.98));
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      padding: 8px 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .kpi-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .kpi-dot-jem {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 10px rgba(34, 197, 94, 0.8);
+    }
+
+    .kpi-dot-non {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #38bdf8;
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
+    }
+
+    .kpi-dot-pas {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #f97316;
+      box-shadow: 0 0 10px rgba(249, 115, 22, 0.9);
+    }
+
+    .kpi-dot-total {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #a855f7;
+      box-shadow: 0 0 10px rgba(168, 85, 247, 0.9);
+    }
+
+    .kpi-value {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .kpi-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* FILTERS */
+    .filters-card {
+      background:
+        linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      padding: 10px 12px;
+      margin-bottom: 12px;
+    }
+
+    .filters-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 140px;
+      flex: 1 1 0;
+    }
+
+    .filter-label {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .filter-select {
+      background: rgba(15, 23, 42, 0.98);
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.9);
+      color: var(--text-main);
+      font-size: 11px;
+      padding: 4px 10px;
+      outline: none;
+    }
+
+    .filter-select:focus {
+      border-color: var(--orange-soft);
+      box-shadow: 0 0 0 1px rgba(245, 130, 32, 0.7);
+    }
+
+    .filter-badge {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* WALL */
     .wall-card {
       background:
         radial-gradient(circle at top left, rgba(59, 130, 246, 0.16), transparent 60%),
         radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.14), transparent 60%),
         linear-gradient(150deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
       border-radius: var(--radius-xl);
-      padding: 12px;
+      padding: 10px;
       border: 1px solid rgba(148, 163, 184, 0.8);
-      margin-bottom: 18px;
+      margin-bottom: 10px;
       position: relative;
       overflow: hidden;
     }
@@ -119,7 +246,7 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       gap: 6px;
     }
 
@@ -136,52 +263,46 @@
     .wall-counter {
       font-size: 11px;
       color: var(--text-muted);
+      text-align: right;
+    }
+
+    /* Scrollable frame */
+    .wall-scroll {
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      padding: 6px;
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.98));
+      max-height: 320px; /* environ 3 lignes de vignettes */
+      overflow-y: auto;
     }
 
     .wall-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-    }
-
-    @media (max-width: 1024px) {
-      .wall-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 768px) {
-      .wall-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
-    @media (max-width: 480px) {
-      .wall-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 8px;
     }
 
     .tile {
       background:
-        radial-gradient(circle at top, rgba(248, 250, 252, 0.16), rgba(15, 23, 42, 0.96));
-      border-radius: 18px;
-      padding: 8px;
-      border: 1px solid rgba(148, 163, 184, 0.8);
+        radial-gradient(circle at top, rgba(248, 250, 252, 0.10), rgba(15, 23, 42, 0.96));
+      border-radius: 14px;
+      padding: 6px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 4px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 0 16px rgba(15, 23, 42, 0.9);
+      box-shadow: 0 0 14px rgba(15, 23, 42, 0.9);
+      min-height: 100px;
     }
 
     .tile-badge {
       position: absolute;
-      top: 6px;
-      left: 6px;
+      top: 4px;
+      left: 4px;
       background: rgba(2, 6, 23, 0.9);
-      padding: 2px 7px;
+      padding: 2px 6px;
       border-radius: 999px;
       font-size: 9px;
       text-transform: uppercase;
@@ -201,10 +322,10 @@
     }
 
     .tile-image-wrap {
-      border-radius: 14px;
+      border-radius: 10px;
       overflow: hidden;
       background: #020617;
-      min-height: 60px;
+      min-height: 52px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -221,16 +342,16 @@
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      gap: 6px;
+      gap: 4px;
     }
 
     .tile-province {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
     }
 
     .tile-sex {
-      font-size: 10px;
+      font-size: 9px;
       color: var(--text-muted);
     }
 
@@ -274,9 +395,79 @@
     </header>
 
     <div class="info">
-      Les vignettes ci-dessous sont générées à partir du fichier <code>data_oranger.json</code> dans le dépôt GitHub.
-      Les données sont automatiquement mises à jour à partir de KoboToolbox via GitHub Actions.
+      Les visuels ci-dessous sont générés à partir du fichier <code>data_oranger.json</code> (mis à jour depuis KoboToolbox via GitHub Actions).
     </div>
+
+    <!-- KPI BAR -->
+    <section class="kpi-bar">
+      <div class="kpi-card">
+        <div class="kpi-label">
+          <span class="kpi-dot-jem"></span>
+          #Jem'engage
+        </div>
+        <div class="kpi-value" id="kpi-jemengage">0</div>
+        <div class="kpi-sub">Engagements individuellement cochés</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">
+          <span class="kpi-dot-non"></span>
+          #NonViolences
+        </div>
+        <div class="kpi-value" id="kpi-nonviolences">0</div>
+        <div class="kpi-sub">Engagements contre les violences</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">
+          <span class="kpi-dot-pas"></span>
+          #PasD'Excuse
+        </div>
+        <div class="kpi-value" id="kpi-pasdexcuse">0</div>
+        <div class="kpi-sub">Refus clair de toute violence</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">
+          <span class="kpi-dot-total"></span>
+          Total vignettes
+        </div>
+        <div class="kpi-value" id="kpi-total">0</div>
+        <div class="kpi-sub">Nombre total de vignettes affichées</div>
+      </div>
+    </section>
+
+    <!-- FILTERS -->
+    <section class="filters-card">
+      <div class="filters-row">
+        <div class="filter-group">
+          <label class="filter-label" for="filter-sticker">Filtrer par engagement</label>
+          <select id="filter-sticker" class="filter-select">
+            <option value="">Tous les engagements</option>
+            <option value="jemengage">#Jem'engage</option>
+            <option value="nonviolences">#NonViolences</option>
+            <option value="pasdexcuse">#PasD'Excuse</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label" for="filter-province">Filtrer par province</label>
+          <select id="filter-province" class="filter-select">
+            <option value="">Toutes les provinces</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label class="filter-label" for="filter-sexe">Filtrer par sexe</label>
+          <select id="filter-sexe" class="filter-select">
+            <option value="">Tous les genres</option>
+            <option value="femme">Femmes</option>
+            <option value="homme">Hommes</option>
+          </select>
+        </div>
+
+        <div class="filter-badge">
+          <span id="filter-summary">Aucun filtre appliqué</span>
+        </div>
+      </div>
+    </section>
 
     <!-- WALL -->
     <section class="wall-card">
@@ -292,8 +483,10 @@
         </div>
       </div>
 
-      <div id="wall-grid" class="wall-grid">
-        <!-- Tiles générées en JS -->
+      <div class="wall-scroll">
+        <div id="wall-grid" class="wall-grid">
+          <!-- Tiles générées en JS -->
+        </div>
       </div>
     </section>
 
@@ -303,199 +496,298 @@
   </div>
 
   <script>
-  // URL des images des stickers (sur ton repo GitHub)
-  const STICKER_IMAGES = {
-    "jemengage": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/Jemengage.png",
-    "nonviolences": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/NonViolence.png",
-    "pasdexcuse": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/PasExcuse.png"
-  };
+    // URL des images des stickers (sur ton repo GitHub)
+    const STICKER_IMAGES = {
+      "jemengage": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/Jemengage.png",
+      "nonviolences": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/NonViolence.png",
+      "pasdexcuse": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/PasExcuse.png"
+    };
 
-  const STICKER_LABELS = {
-    "jemengage": "#Jem'engage",
-    "nonviolences": "#NonViolences",
-    "pasdexcuse": "#PasD'Excuse"
-  };
+    const STICKER_LABELS = {
+      "jemengage": "#Jem'engage",
+      "nonviolences": "#NonViolences",
+      "pasdexcuse": "#PasD'Excuse"
+    };
 
-  const wallGrid = document.getElementById("wall-grid");
-  const wallCount = document.getElementById("wall-count");
+    const wallGrid = document.getElementById("wall-grid");
+    const wallCount = document.getElementById("wall-count");
 
-  let expandedData = [];
+    const kpiJem = document.getElementById("kpi-jemengage");
+    const kpiNon = document.getElementById("kpi-nonviolences");
+    const kpiPas = document.getElementById("kpi-pasdexcuse");
+    const kpiTotal = document.getElementById("kpi-total");
 
-  async function loadData() {
-    try {
-      // Chargement direct depuis le JSON brut GitHub (toujours à jour après le workflow)
-      const resp = await fetch(
-        "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/data_oranger.json?nocache=" + Date.now()
-      );
+    const filterSticker = document.getElementById("filter-sticker");
+    const filterProvince = document.getElementById("filter-province");
+    const filterSexe = document.getElementById("filter-sexe");
+    const filterSummary = document.getElementById("filter-summary");
 
-      if (!resp.ok) {
-        throw new Error("HTTP " + resp.status);
+    let expandedData = [];
+    let stickerStats = {
+      jemengage: 0,
+      nonviolences: 0,
+      pasdexcuse: 0
+    };
+
+    const currentFilters = {
+      sticker: "",
+      province: "",
+      sexe: ""
+    };
+
+    async function loadData() {
+      try {
+        const resp = await fetch(
+          "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/data_oranger.json?nocache=" + Date.now()
+        );
+
+        if (!resp.ok) {
+          throw new Error("HTTP " + resp.status);
+        }
+
+        const json = await resp.json();
+        const rows = Array.isArray(json) ? json : (json.results || []);
+
+        prepareData(rows);
+        populateProvinceFilter();
+        updateKpis();
+        renderWall();
+      } catch (e) {
+        console.error("Erreur chargement data_oranger.json:", e);
+        wallGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; font-size: 12px; color: #fca5a5;">
+            ⚠️ Erreur lors du chargement des données.<br/>
+            Vérifiez que <code>data_oranger.json</code> existe bien dans le dépôt et contient un JSON valide.
+          </div>
+        `;
       }
-
-      const json = await resp.json();
-
-      // Accepte soit un tableau direct, soit un objet avec .results (export Kobo brut)
-      const rows = Array.isArray(json) ? json : (json.results || []);
-      prepareData(rows);
-      renderWall();
-    } catch (e) {
-      console.error("Erreur chargement data_oranger.json:", e);
-      wallGrid.innerHTML = `
-        <div style="grid-column: 1 / -1; font-size: 12px; color: #fca5a5;">
-          ⚠️ Erreur lors du chargement des données.<br/>
-          Vérifiez que <code>data_oranger.json</code> existe bien dans le dépôt et contient un JSON valide.
-        </div>
-      `;
     }
-  }
 
-  function prepareData(rows) {
-    expandedData = [];
+    function prepareData(rows) {
+      expandedData = [];
+      stickerStats = {
+        jemengage: 0,
+        nonviolences: 0,
+        pasdexcuse: 0
+      };
 
-    for (const row of rows) {
-      let raw = row.stickers;
-      let codesList = [];
+      for (const row of rows) {
+        let raw = row.stickers;
+        let codesList = [];
 
-      // 1) Si c'est déjà un tableau
-      if (Array.isArray(raw)) {
-        codesList = raw;
-      }
-      // 2) Si c'est une chaîne de texte ("jemengage pasdexcuse nonviolences")
-      else if (typeof raw === "string") {
-        raw = raw.trim();
-        if (raw) {
-          codesList = raw.split(/\s+/g);
+        // 1) Si c'est déjà un tableau
+        if (Array.isArray(raw)) {
+          codesList = raw;
         }
-      }
-      // 3) Autre type (nombre, objet...) -> on tente une conversion en string
-      else if (raw != null) {
-        const s = String(raw).trim();
-        if (s) {
-          codesList = s.split(/\s+/g);
-        }
-      }
-
-      // 4) Si on n'a rien trouvé dans stickers, on essaie de deviner
-      if (!codesList.length) {
-        for (const v of Object.values(row)) {
-          if (typeof v === "string" && /(jemengage|nonviolences|pasdexcuse)/i.test(v)) {
-            codesList = v.trim().split(/\s+/g);
-            break;
+        // 2) Si c'est une chaîne de texte ("jemengage pasdexcuse nonviolences")
+        else if (typeof raw === "string") {
+          raw = raw.trim();
+          if (raw) {
+            codesList = raw.split(/\s+/g);
           }
         }
+        // 3) Autre type -> tentative conversion
+        else if (raw != null) {
+          const s = String(raw).trim();
+          if (s) {
+            codesList = s.split(/\s+/g);
+          }
+        }
+
+        // 4) Si rien dans stickers, on tente de deviner
+        if (!codesList.length) {
+          for (const v of Object.values(row)) {
+            if (typeof v === "string" && /(jemengage|nonviolences|pasdexcuse)/i.test(v)) {
+              codesList = v.trim().split(/\s+/g);
+              break;
+            }
+          }
+        }
+
+        if (!codesList.length) continue;
+
+        const province = row.province || "";
+        const sexe =
+          row.Engagement_sexe ||
+          row.engagement_sexe ||
+          row["Mon_engagement_contr_iolences_en_tant_que"] ||
+          row["Mon_engagement_contre_les_violences_en_tant_que"] ||
+          row.sexe ||
+          "";
+
+        const submission_time = row._submission_time || row._submitted_at || "";
+
+        for (const s of codesList) {
+          const code = String(s).toLowerCase();
+          if (!code) continue;
+
+          // Mise à jour des stats globales
+          if (code === "jemengage") stickerStats.jemengage += 1;
+          if (code === "nonviolences") stickerStats.nonviolences += 1;
+          if (code === "pasdexcuse") stickerStats.pasdexcuse += 1;
+
+          expandedData.push({
+            _id: row._id,
+            sticker: code,
+            province: province,
+            sexe: sexe,
+            submission_time: submission_time
+          });
+        }
       }
 
-      if (!codesList.length) continue;
+      // Tri par date décroissante
+      expandedData.sort((a, b) => {
+        if (!a.submission_time || !b.submission_time) return 0;
+        return a.submission_time < b.submission_time ? 1 : -1;
+      });
+    }
 
-      const province = row.province || "";
-      const sexe =
-        row.Engagement_sexe ||
-        row.engagement_sexe ||
-        row["Mon_engagement_contr_iolences_en_tant_que"] ||
-        row["Mon_engagement_contre_les_violences_en_tant_que"] ||
-        row.sexe ||
-        "";
+    function populateProvinceFilter() {
+      const provinces = new Set();
+      for (const row of expandedData) {
+        if (row.province) provinces.add(row.province);
+      }
+      const sorted = Array.from(provinces).sort((a, b) =>
+        a.localeCompare(b, "fr", { sensitivity: "base" })
+      );
 
-      const submission_time = row._submission_time || row._submitted_at || "";
-
-      for (const s of codesList) {
-        const code = String(s).toLowerCase();
-        if (!code) continue;
-
-        expandedData.push({
-          _id: row._id,
-          sticker: code,
-          province: province,
-          sexe: sexe,
-          submission_time: submission_time
-        });
+      // Reset options (sauf la première)
+      filterProvince.innerHTML = '<option value="">Toutes les provinces</option>';
+      for (const p of sorted) {
+        const opt = document.createElement("option");
+        opt.value = p;
+        opt.textContent = p;
+        filterProvince.appendChild(opt);
       }
     }
 
-    // Trier par date décroissante
-    expandedData.sort((a, b) => {
-      if (!a.submission_time || !b.submission_time) return 0;
-      return a.submission_time < b.submission_time ? 1 : -1;
+    function updateKpis() {
+      kpiJem.textContent = stickerStats.jemengage;
+      kpiNon.textContent = stickerStats.nonviolences;
+      kpiPas.textContent = stickerStats.pasdexcuse;
+      kpiTotal.textContent = expandedData.length;
+    }
+
+    function formatShortDate(str) {
+      if (!str) return "";
+      const d = new Date(str);
+      if (isNaN(d)) return "";
+      return d.toLocaleDateString("fr-FR", {
+        day: "2-digit",
+        month: "2-digit"
+      });
+    }
+
+    function buildFilterSummary() {
+      const parts = [];
+      if (currentFilters.sticker) {
+        parts.push("Sticker : " + (STICKER_LABELS[currentFilters.sticker] || currentFilters.sticker));
+      }
+      if (currentFilters.province) {
+        parts.push("Province : " + currentFilters.province);
+      }
+      if (currentFilters.sexe) {
+        parts.push("Sexe : " + currentFilters.sexe);
+      }
+      filterSummary.textContent = parts.length ? parts.join(" · ") : "Aucun filtre appliqué";
+    }
+
+    function renderWall() {
+      let filtered = expandedData.slice();
+
+      if (currentFilters.sticker) {
+        filtered = filtered.filter(r => r.sticker === currentFilters.sticker);
+      }
+      if (currentFilters.province) {
+        filtered = filtered.filter(r => r.province === currentFilters.province);
+      }
+      if (currentFilters.sexe) {
+        filtered = filtered.filter(
+          r => (r.sexe || "").toLowerCase() === currentFilters.sexe.toLowerCase()
+        );
+      }
+
+      wallCount.textContent = filtered.length.toString();
+      buildFilterSummary();
+
+      if (filtered.length === 0) {
+        wallGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; font-size: 12px; color: #e5e7eb;">
+            Aucun engagement ne correspond aux filtres sélectionnés.
+          </div>
+        `;
+        return;
+      }
+
+      wallGrid.innerHTML = "";
+
+      for (const row of filtered) {
+        const stickerCode = row.sticker;
+        const imgSrc = STICKER_IMAGES[stickerCode] || "";
+        const label = STICKER_LABELS[stickerCode] || stickerCode;
+
+        const tile = document.createElement("article");
+        tile.className = "tile";
+
+        const badge = document.createElement("div");
+        badge.className = "tile-badge";
+        badge.innerHTML = `<span class="badge-dot"></span><span>${label}</span>`;
+        tile.appendChild(badge);
+
+        const imgWrap = document.createElement("div");
+        imgWrap.className = "tile-image-wrap";
+
+        if (imgSrc) {
+          const img = document.createElement("img");
+          img.className = "tile-image";
+          img.src = imgSrc;
+          img.alt = label;
+          imgWrap.appendChild(img);
+        } else {
+          imgWrap.innerHTML = `<div style="font-size:11px; color:#6b7280; padding:6px; text-align:center;">
+            ${label}
+          </div>`;
+        }
+
+        tile.appendChild(imgWrap);
+
+        const meta = document.createElement("div");
+        meta.className = "tile-meta";
+
+        const left = document.createElement("div");
+        left.innerHTML = `
+          <div class="tile-province">${row.province || "Province inconnue"}</div>
+          <div class="tile-sex">${row.sexe || "&nbsp;"}</div>
+        `;
+
+        const right = document.createElement("div");
+        right.className = "tile-time";
+        right.textContent = formatShortDate(row.submission_time);
+
+        meta.appendChild(left);
+        meta.appendChild(right);
+        tile.appendChild(meta);
+
+        wallGrid.appendChild(tile);
+      }
+    }
+
+    // Gestion des filtres
+    filterSticker.addEventListener("change", () => {
+      currentFilters.sticker = filterSticker.value;
+      renderWall();
     });
-  }
-
-  function formatShortDate(str) {
-    if (!str) return "";
-    const d = new Date(str);
-    if (isNaN(d)) return "";
-    return d.toLocaleDateString("fr-FR", {
-      day: "2-digit",
-      month: "2-digit"
+    filterProvince.addEventListener("change", () => {
+      currentFilters.province = filterProvince.value;
+      renderWall();
     });
-  }
+    filterSexe.addEventListener("change", () => {
+      currentFilters.sexe = filterSexe.value;
+      renderWall();
+    });
 
-  function renderWall() {
-    wallCount.textContent = expandedData.length.toString();
-
-    if (expandedData.length === 0) {
-      wallGrid.innerHTML = `
-        <div style="grid-column: 1 / -1; font-size: 12px; color: #e5e7eb;">
-          Aucun engagement n'est encore disponible dans <code>data_oranger.json</code>.
-        </div>
-      `;
-      return;
-    }
-
-    wallGrid.innerHTML = "";
-
-    for (const row of expandedData) {
-      const stickerCode = row.sticker;
-      const imgSrc = STICKER_IMAGES[stickerCode] || "";
-      const label = STICKER_LABELS[stickerCode] || stickerCode;
-
-      const tile = document.createElement("article");
-      tile.className = "tile";
-
-      const badge = document.createElement("div");
-      badge.className = "tile-badge";
-      badge.innerHTML = `<span class="badge-dot"></span><span>${label}</span>`;
-      tile.appendChild(badge);
-
-      const imgWrap = document.createElement("div");
-      imgWrap.className = "tile-image-wrap";
-
-      if (imgSrc) {
-        const img = document.createElement("img");
-        img.className = "tile-image";
-        img.src = imgSrc;
-        img.alt = label;
-        imgWrap.appendChild(img);
-      } else {
-        imgWrap.innerHTML = `<div style="font-size:11px; color:#6b7280; padding:8px; text-align:center;">
-          ${label}
-        </div>`;
-      }
-
-      tile.appendChild(imgWrap);
-
-      const meta = document.createElement("div");
-      meta.className = "tile-meta";
-
-      const left = document.createElement("div");
-      left.innerHTML = `
-        <div class="tile-province">${row.province || "Province inconnue"}</div>
-        <div class="tile-sex">${row.sexe || "&nbsp;"}</div>
-      `;
-
-      const right = document.createElement("div");
-      right.className = "tile-time";
-      right.textContent = formatShortDate(row.submission_time);
-
-      meta.appendChild(left);
-      meta.appendChild(right);
-      tile.appendChild(meta);
-
-      wallGrid.appendChild(tile);
-    }
-  }
-
-  loadData();
-</script>
-
+    loadData();
+  </script>
 </body>
 </html>
