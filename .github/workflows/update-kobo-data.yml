@@ -2,7 +2,7 @@ name: Mettre à jour les données Kobo pour le mur digital
 
 on:
   schedule:
-    - cron: "0 * * * *"   # Toutes les heures (UTC)
+    - cron: "*/15 * * * *"   # Toutes les 15 minutes (UTC)
   workflow_dispatch: {}   # Lancement manuel
 
 jobs:
