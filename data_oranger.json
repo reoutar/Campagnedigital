@@ -68,5 +68,26 @@
     "province": "Lomami",
     "Engagement_sexe": "femme",
     "_submission_time": "2025-11-21T12:30:50"
+  },
+  {
+    "_id": 611502355,
+    "stickers": "pasdexcuse nonviolences jemengage",
+    "province": "Sud_Kivu",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-21T13:02:54"
+  },
+  {
+    "_id": 611504844,
+    "stickers": "jemengage nonviolences pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-21T13:05:29"
+  },
+  {
+    "_id": 611505298,
+    "stickers": "jemengage",
+    "province": "Haut_Uele",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-21T13:06:06"
   }
 ]
