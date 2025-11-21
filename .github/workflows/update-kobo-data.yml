@@ -49,12 +49,18 @@ jobs:
 
           records = []
           for r in results:
+              # ATTENTION : noms EXACTS des colonnes Kobo
+              stickers = r.get("stickers", "") or ""
+              province = r.get("province", "") or ""
+              sexe = r.get("Engagement_sexe", "") or r.get("engagement_sexe", "") or ""
+              sub_time = r.get("_submission_time") or r.get("_submitted_at") or ""
+
               records.append({
                   "_id": r.get("_id"),
-                  "stickers": r.get("stickers", ""),
-                  "province": r.get("province", ""),
-                  "Engagement_sexe": r.get("Engagement_sexe") or r.get("engagement_sexe") or "",
-                  "_submission_time": r.get("_submission_time") or r.get("_submitted_at") or "",
+                  "stickers": stickers,
+                  "province": province,
+                  "Engagement_sexe": sexe,
+                  "_submission_time": sub_time,
               })
 
           out_path = Path("data_oranger.json")
