@@ -12,5 +12,40 @@
     "province": "Kinshasa",
     "Engagement_sexe": "femme",
     "_submission_time": "2025-11-25T08:02:29"
+  },
+  {
+    "_id": 614419481,
+    "stickers": "jemengage nonviolences pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T10:19:45"
+  },
+  {
+    "_id": 614420488,
+    "stickers": "nonviolences pasdexcuse jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T10:20:50"
+  },
+  {
+    "_id": 614421240,
+    "stickers": "pasdexcuse jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T10:21:37"
+  },
+  {
+    "_id": 614425621,
+    "stickers": "jemengage",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T10:26:12"
+  },
+  {
+    "_id": 614425892,
+    "stickers": "nonviolences jemengage pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T10:26:32"
   }
 ]
