@@ -25,7 +25,8 @@
       --orange-neon: #ffb347;
       --blue-onu: #0b3b70;
       --blue-deep: #020617;
-      --bg: #0b3b70;
+      --bg: #020617;
+      --bg-panel: rgba(15, 23, 42, 0.96);
       --text-main: #f9fafb;
       --text-muted: #9ca3af;
       --radius-xl: 22px;
@@ -42,8 +43,8 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
         radial-gradient(circle at top left, rgba(56, 189, 248, 0.25), transparent 55%),
-        radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.25), transparent 60%),
-        linear-gradient(135deg, #0b3b70, #020617);
+        radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.22), transparent 60%),
+        radial-gradient(circle at center, rgba(15, 23, 42, 0.9), #020617);
       color: var(--text-main);
       min-height: 100vh;
     }
@@ -246,11 +247,11 @@
       background:
         radial-gradient(circle at top left, rgba(59, 130, 246, 0.16), transparent 60%),
         radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.14), transparent 60%),
-        linear-gradient(150deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
+        linear-gradient(150deg, rgba(15, 23, 42, 0.98), rgba(8, 15, 30, 0.98));
       border-radius: var(--radius-xl);
       padding: 10px;
       border: 1px solid rgba(148, 163, 184, 0.8);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
       position: relative;
       overflow: hidden;
     }
@@ -284,30 +285,36 @@
       border: 1px solid rgba(51, 65, 85, 0.9);
       padding: 6px;
       background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.98));
-      max-height: 220px;
-      overflow: hidden; /* important pour le défilement */
-      position: relative;
+      max-height: 260px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
-    /* Ligne horizontale en continu */
-    .wall-grid {
+    .wall-row {
       display: flex;
       flex-wrap: nowrap;
       gap: 8px;
       will-change: transform;
     }
 
-    .wall-grid.marquee {
-      animation: scrollX 40s linear infinite;
+    .wall-row.marquee-left {
+      animation: marqueeLeft 40s linear infinite;
     }
 
-    @keyframes scrollX {
-      0% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(-50%);
-      }
+    .wall-row.marquee-right {
+      animation: marqueeRight 48s linear infinite;
+    }
+
+    @keyframes marqueeLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    @keyframes marqueeRight {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(50%); }
     }
 
     .tile {
@@ -393,9 +400,9 @@
     /* MAP CARD */
     .map-card {
       background:
-        radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 60%),
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 60%),
         radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.16), transparent 60%),
-        linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
+        linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(8, 15, 30, 0.98));
       border-radius: var(--radius-xl);
       padding: 10px 12px;
       border: 1px solid rgba(148, 163, 184, 0.8);
@@ -475,8 +482,8 @@
         page-break-inside: avoid;
       }
 
-      /* on coupe l'animation pour impression */
-      .wall-grid.marquee {
+      .wall-row.marquee-left,
+      .wall-row.marquee-right {
         animation: none !important;
         transform: translateX(0) !important;
       }
@@ -582,7 +589,7 @@
       </div>
     </section>
 
-    <!-- MUR DES ENGAGEMENTS -->
+    <!-- MUR DES ENGAGEMENTS (2 LIGNES) -->
     <section class="wall-card">
       <div class="wall-header-row">
         <div>
@@ -597,9 +604,8 @@
       </div>
 
       <div class="wall-scroll">
-        <div id="wall-grid" class="wall-grid">
-          <!-- Vignettes générées en JS -->
-        </div>
+        <div id="wall-row-1" class="wall-row"></div>
+        <div id="wall-row-2" class="wall-row"></div>
       </div>
     </section>
 
@@ -625,7 +631,7 @@
   </div>
 
   <script>
-    // URL des images des stickers (repo GitHub)
+    // Images des stickers
     const STICKER_IMAGES = {
       "jemengage": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/Jemengage.png",
       "nonviolences": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/NonViolence.png",
@@ -638,7 +644,8 @@
       "pasdexcuse": "#PasD'Excuse"
     };
 
-    const wallGrid = document.getElementById("wall-grid");
+    const wallRow1 = document.getElementById("wall-row-1");
+    const wallRow2 = document.getElementById("wall-row-2");
     const wallCount = document.getElementById("wall-count");
 
     const kpiJem = document.getElementById("kpi-jemengage");
@@ -664,10 +671,10 @@
       sexe: ""
     };
 
-    // URL (relative) du GeoJSON ADM1 - à adapter si besoin
+    // GeoJSON ADM1 local
     const GEOJSON_URL = "cod_admbnda_adm1_rgc_itos_20190911.json";
 
-    // Coordonnées approximatives des provinces
+    // Coordonnées des provinces
     const PROVINCE_COORDS = {
       "Kinshasa":        { lat: -4.325,  lon: 15.322 },
       "Bas-Uele":        { lat: 3.85,    lon: 25.5   },
@@ -679,7 +686,7 @@
       "Kasaï":           { lat: -5.0,    lon: 21.5   },
       "Kasaï-Central":   { lat: -6.0,    lon: 22.0   },
       "Kasaï-Oriental":  { lat: -6.5,    lon: 24.0   },
-      "Kongo-Central":   { lat: -5.2,    lon: 13.5   },
+      "Kongo-Central":   { lat: -5.2,   lon: 13.5   },
       "Kwango":          { lat: -5.5,    lon: 18.0   },
       "Kwilu":           { lat: -5.2,    lon: 18.8   },
       "Lomami":          { lat: -6.5,    lon: 24.5   },
@@ -709,7 +716,7 @@
         attributionControl: false
       }).setView([-2.5, 23.5], 5);
 
-      // Fond de carte différent d'OSM classique
+      // Fond sombre moderne
       L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
         maxZoom: 10,
         minZoom: 3
@@ -730,10 +737,10 @@
         const geojson = await resp.json();
         L.geoJSON(geojson, {
           style: {
-            color: "#f97316",
+            color: "#38bdf8",
             weight: 1,
             fillColor: "#0b3b70",
-            fillOpacity: 0.1
+            fillOpacity: 0.15
           },
           onEachFeature: function (feature, layer) {
             const name =
@@ -808,12 +815,13 @@
         renderWall();
       } catch (e) {
         console.error("Erreur chargement data_oranger.json:", e);
-        wallGrid.innerHTML = `
+        wallRow1.innerHTML = `
           <div style="font-size: 12px; color: #fca5a5;">
             ⚠️ Erreur lors du chargement des données.<br/>
             Vérifiez que <code>data_oranger.json</code> existe bien dans le dépôt et contient un JSON valide.
           </div>
         `;
+        wallRow2.innerHTML = "";
       }
     }
 
@@ -843,25 +851,13 @@
           }
         }
 
-        if (!codesList.length) {
-          for (const v of Object.values(row)) {
-            if (typeof v === "string" && /(jemengage|nonviolences|pasdexcuse)/i.test(v)) {
-              codesList = v.trim().split(/\s+/g);
-              break;
-            }
-          }
-        }
-
         if (!codesList.length) continue;
 
-        const province = row.province || "";
-        const sexe =
-          row.Engagement_sexe ||
-          row.engagement_sexe ||
-          row["Mon_engagement_contr_iolences_en_tant_que"] ||
-          row["Mon_engagement_contre_les_violences_en_tant_que"] ||
-          row.sexe ||
-          "";
+        // Normaliser les provinces: Nord_Kivu -> Nord-Kivu
+        const provinceRaw = row.province || "";
+        const province = provinceRaw.replace(/_/g, "-");
+
+        const sexe = row.Engagement_sexe || row.engagement_sexe || row.sexe || "";
 
         const submission_time = row._submission_time || row._submitted_at || "";
 
@@ -938,6 +934,56 @@
       filterSummary.textContent = parts.length ? parts.join(" · ") : "Aucun filtre appliqué";
     }
 
+    function createTileElement(row) {
+      const stickerCode = row.sticker;
+      const imgSrc = STICKER_IMAGES[stickerCode] || "";
+      const label = STICKER_LABELS[stickerCode] || stickerCode;
+
+      const tile = document.createElement("article");
+      tile.className = "tile";
+
+      const badge = document.createElement("div");
+      badge.className = "tile-badge";
+      badge.innerHTML = `<span class="badge-dot"></span><span>${label}</span>`;
+      tile.appendChild(badge);
+
+      const imgWrap = document.createElement("div");
+      imgWrap.className = "tile-image-wrap";
+
+      if (imgSrc) {
+        const img = document.createElement("img");
+        img.className = "tile-image";
+        img.src = imgSrc;
+        img.alt = label;
+        imgWrap.appendChild(img);
+      } else {
+        imgWrap.innerHTML = `<div style="font-size:11px; color:#6b7280; padding:6px; text-align:center;">
+          ${label}
+        </div>`;
+      }
+
+      tile.appendChild(imgWrap);
+
+      const meta = document.createElement("div");
+      meta.className = "tile-meta";
+
+      const left = document.createElement("div");
+      left.innerHTML = `
+        <div class="tile-province">${row.province || "Province inconnue"}</div>
+        <div class="tile-sex">${row.sexe || "&nbsp;"}</div>
+      `;
+
+      const right = document.createElement("div");
+      right.className = "tile-time";
+      right.textContent = formatShortDate(row.submission_time);
+
+      meta.appendChild(left);
+      meta.appendChild(right);
+      tile.appendChild(meta);
+
+      return tile;
+    }
+
     function renderWall() {
       let filtered = expandedData.slice();
 
@@ -956,11 +1002,13 @@
       wallCount.textContent = filtered.length.toString();
       buildFilterSummary();
 
-      wallGrid.classList.remove("marquee");
-      wallGrid.innerHTML = "";
+      wallRow1.classList.remove("marquee-left");
+      wallRow2.classList.remove("marquee-right");
+      wallRow1.innerHTML = "";
+      wallRow2.innerHTML = "";
 
       if (filtered.length === 0) {
-        wallGrid.innerHTML = `
+        wallRow1.innerHTML = `
           <div style="font-size: 12px; color: #e5e7eb;">
             Aucun engagement ne correspond aux filtres sélectionnés.
           </div>
@@ -968,63 +1016,31 @@
         return;
       }
 
-      for (const row of filtered) {
-        const stickerCode = row.sticker;
-        const imgSrc = STICKER_IMAGES[stickerCode] || "";
-        const label = STICKER_LABELS[stickerCode] || stickerCode;
-
-        const tile = document.createElement("article");
-        tile.className = "tile";
-
-        const badge = document.createElement("div");
-        badge.className = "tile-badge";
-        badge.innerHTML = `<span class="badge-dot"></span><span>${label}</span>`;
-        tile.appendChild(badge);
-
-        const imgWrap = document.createElement("div");
-        imgWrap.className = "tile-image-wrap";
-
-        if (imgSrc) {
-          const img = document.createElement("img");
-          img.className = "tile-image";
-          img.src = imgSrc;
-          img.alt = label;
-          imgWrap.appendChild(img);
+      // Répartir les tuiles sur 2 lignes (pair / impair)
+      filtered.forEach((row, idx) => {
+        const tile = createTileElement(row);
+        if (idx % 2 === 0) {
+          wallRow1.appendChild(tile);
         } else {
-          imgWrap.innerHTML = `<div style="font-size:11px; color:#6b7280; padding:6px; text-align:center;">
-            ${label}
-          </div>`;
+          wallRow2.appendChild(tile);
         }
-
-        tile.appendChild(imgWrap);
-
-        const meta = document.createElement("div");
-        meta.className = "tile-meta";
-
-        const left = document.createElement("div");
-        left.innerHTML = `
-          <div class="tile-province">${row.province || "Province inconnue"}</div>
-          <div class="tile-sex">${row.sexe || "&nbsp;"}</div>
-        `;
-
-        const right = document.createElement("div");
-        right.className = "tile-time";
-        right.textContent = formatShortDate(row.submission_time);
-
-        meta.appendChild(left);
-        meta.appendChild(right);
-        tile.appendChild(meta);
-
-        wallGrid.appendChild(tile);
-      }
-
-      // Dupliquer les vignettes pour que l'animation -50% fonctionne comme une boucle
-      const items = Array.from(wallGrid.children);
-      items.forEach(el => {
-        wallGrid.appendChild(el.cloneNode(true));
       });
 
-      wallGrid.classList.add("marquee");
+      // Dupliquer chaque ligne pour effet de boucle
+      [wallRow1, wallRow2].forEach(rowEl => {
+        const children = Array.from(rowEl.children);
+        children.forEach(el => {
+          rowEl.appendChild(el.cloneNode(true));
+        });
+      });
+
+      // Lancer les animations
+      if (wallRow1.children.length > 0) {
+        wallRow1.classList.add("marquee-left");
+      }
+      if (wallRow2.children.length > 0) {
+        wallRow2.classList.add("marquee-right");
+      }
     }
 
     if (filterSticker) {
