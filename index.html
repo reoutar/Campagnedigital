@@ -284,15 +284,30 @@
       border: 1px solid rgba(51, 65, 85, 0.9);
       padding: 6px;
       background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.98));
-      max-height: 320px;
-      overflow: hidden; /* important pour l'auto-scroll */
+      max-height: 220px;
+      overflow: hidden; /* important pour le défilement */
       position: relative;
     }
 
+    /* Ligne horizontale en continu */
     .wall-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      display: flex;
+      flex-wrap: nowrap;
       gap: 8px;
+      will-change: transform;
+    }
+
+    .wall-grid.marquee {
+      animation: scrollX 40s linear infinite;
+    }
+
+    @keyframes scrollX {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
 
     .tile {
@@ -307,7 +322,8 @@
       position: relative;
       overflow: hidden;
       box-shadow: 0 0 14px rgba(15, 23, 42, 0.9);
-      min-height: 100px;
+      min-width: 140px;
+      max-width: 160px;
     }
 
     .tile-badge {
@@ -420,8 +436,7 @@
       margin-bottom: 8px;
     }
 
-    /* ---------- STYLES IMPRESSION / PDF ---------- */
-
+    /* IMPRESSION */
     @page {
       size: A4 portrait;
       margin: 10mm;
@@ -458,6 +473,12 @@
       .map-card,
       .wall-card {
         page-break-inside: avoid;
+      }
+
+      /* on coupe l'animation pour impression */
+      .wall-grid.marquee {
+        animation: none !important;
+        transform: translateX(0) !important;
       }
     }
   </style>
@@ -561,7 +582,7 @@
       </div>
     </section>
 
-    <!-- MUR DES ENGAGEMENTS (AVANT LA CARTE) -->
+    <!-- MUR DES ENGAGEMENTS -->
     <section class="wall-card">
       <div class="wall-header-row">
         <div>
@@ -619,7 +640,6 @@
 
     const wallGrid = document.getElementById("wall-grid");
     const wallCount = document.getElementById("wall-count");
-    const wallScroll = document.querySelector(".wall-scroll");
 
     const kpiJem = document.getElementById("kpi-jemengage");
     const kpiNon = document.getElementById("kpi-nonviolences");
@@ -644,40 +664,10 @@
       sexe: ""
     };
 
-    // --- AUTO-SCROLL DU MUR AVEC requestAnimationFrame ---
-    let scrollRAF = null;
+    // URL (relative) du GeoJSON ADM1 - à adapter si besoin
+    const GEOJSON_URL = "cod_admbnda_adm1_rgc_itos_20190911.json";
 
-    function autoScrollLoop() {
-      if (!wallScroll) return;
-
-      wallScroll.scrollTop += 0.5; // vitesse du scroll (px/frame)
-      if (wallScroll.scrollTop + wallScroll.clientHeight >= wallScroll.scrollHeight - 1) {
-        wallScroll.scrollTop = 0;
-      }
-      scrollRAF = requestAnimationFrame(autoScrollLoop);
-    }
-
-    function startAutoScroll() {
-      if (!wallScroll) return;
-      if (wallScroll.scrollHeight <= wallScroll.clientHeight + 1) return; // rien à scroller
-      stopAutoScroll();
-      wallScroll.scrollTop = 0;
-      scrollRAF = requestAnimationFrame(autoScrollLoop);
-    }
-
-    function stopAutoScroll() {
-      if (scrollRAF !== null) {
-        cancelAnimationFrame(scrollRAF);
-        scrollRAF = null;
-      }
-    }
-
-    if (wallScroll) {
-      wallScroll.addEventListener("mouseenter", stopAutoScroll);
-      wallScroll.addEventListener("mouseleave", startAutoScroll);
-    }
-
-    // Coordonnées approximatives des provinces de la RDC (pour les cercles agrégés)
+    // Coordonnées approximatives des provinces
     const PROVINCE_COORDS = {
       "Kinshasa":        { lat: -4.325,  lon: 15.322 },
       "Bas-Uele":        { lat: 3.85,    lon: 25.5   },
@@ -719,7 +709,7 @@
         attributionControl: false
       }).setView([-2.5, 23.5], 5);
 
-      // Fond de carte sombre (tu peux remettre OSM si tu veux)
+      // Fond de carte différent d'OSM classique
       L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
         maxZoom: 10,
         minZoom: 3
@@ -727,20 +717,16 @@
 
       provinceLayerGroup = L.layerGroup().addTo(map);
 
-      // Charge le GeoJSON ADM1 de la RDC (fichier à mettre à côté du HTML)
       loadRdcAdm1();
     }
 
     async function loadRdcAdm1() {
       try {
-        // ⚠️ Assure-toi que le nom du fichier correspond :
-        // par exemple cod_admbnda_adm1_rgc_itos_20190911.json
-        const resp = await fetch("cod_admbnda_adm1_rgc_itos_20190911.json");
+        const resp = await fetch(GEOJSON_URL);
         if (!resp.ok) {
-          console.warn("GeoJSON RDC introuvable ou HTTP != 200");
+          console.warn("GeoJSON ADM1 non trouvé :", GEOJSON_URL);
           return;
         }
-
         const geojson = await resp.json();
         L.geoJSON(geojson, {
           style: {
@@ -823,7 +809,7 @@
       } catch (e) {
         console.error("Erreur chargement data_oranger.json:", e);
         wallGrid.innerHTML = `
-          <div style="grid-column: 1 / -1; font-size: 12px; color: #fca5a5;">
+          <div style="font-size: 12px; color: #fca5a5;">
             ⚠️ Erreur lors du chargement des données.<br/>
             Vérifiez que <code>data_oranger.json</code> existe bien dans le dépôt et contient un JSON valide.
           </div>
@@ -970,17 +956,17 @@
       wallCount.textContent = filtered.length.toString();
       buildFilterSummary();
 
+      wallGrid.classList.remove("marquee");
+      wallGrid.innerHTML = "";
+
       if (filtered.length === 0) {
         wallGrid.innerHTML = `
-          <div style="grid-column: 1 / -1; font-size: 12px; color: #e5e7eb;">
+          <div style="font-size: 12px; color: #e5e7eb;">
             Aucun engagement ne correspond aux filtres sélectionnés.
           </div>
         `;
-        stopAutoScroll();
         return;
       }
-
-      wallGrid.innerHTML = "";
 
       for (const row of filtered) {
         const stickerCode = row.sticker;
@@ -1032,8 +1018,13 @@
         wallGrid.appendChild(tile);
       }
 
-      // Lancer / relancer le défilement automatique
-      startAutoScroll();
+      // Dupliquer les vignettes pour que l'animation -50% fonctionne comme une boucle
+      const items = Array.from(wallGrid.children);
+      items.forEach(el => {
+        wallGrid.appendChild(el.cloneNode(true));
+      });
+
+      wallGrid.classList.add("marquee");
     }
 
     if (filterSticker) {
