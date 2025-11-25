@@ -1314,5 +1314,19 @@
     "province": "Kasai",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-11-25T16:50:48"
+  },
+  {
+    "_id": 614818653,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T17:09:43"
+  },
+  {
+    "_id": 614822969,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T17:15:31"
   }
 ]
