@@ -438,12 +438,10 @@
         padding: 0;
       }
 
-      /* On réduit légèrement la carte pour tenir sur la page */
       #rdc-map {
         height: 200px;
       }
 
-      /* On supprime les ombres qui peuvent salir l'impression */
       .header,
       .kpi-card,
       .filters-card,
@@ -453,7 +451,6 @@
         box-shadow: none !important;
       }
 
-      /* Éviter les coupures bizarres au milieu des blocs principaux */
       .header,
       .kpi-bar,
       .filters-card,
@@ -528,42 +525,7 @@
       </div>
     </section>
 
-    <!-- FILTERS -->
-    <section class="filters-card">
-      <div class="filters-row">
-        <div class="filter-group">
-          <label class="filter-label" for="filter-sticker">Filtrer par engagement</label>
-          <select id="filter-sticker" class="filter-select">
-            <option value="">Tous les engagements</option>
-            <option value="jemengage">#Jem'engage</option>
-            <option value="nonviolences">#NonViolences</option>
-            <option value="pasdexcuse">#PasD'Excuse</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label class="filter-label" for="filter-province">Filtrer par province</label>
-          <select id="filter-province" class="filter-select">
-            <option value="">Toutes les provinces</option>
-          </select>
-        </div>
-
-        <div class="filter-group">
-          <label class="filter-label" for="filter-sexe">Filtrer par sexe</label>
-          <select id="filter-sexe" class="filter-select">
-            <option value="">Tous les genres</option>
-            <option value="femme">Femmes</option>
-            <option value="homme">Hommes</option>
-          </select>
-        </div>
-
-        <div class="filter-badge">
-          <span id="filter-summary">Aucun filtre appliqué</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- WALL -->
+    <!-- MUR D'ENGAGEMENTS AVANT LA CARTE -->
     <section class="wall-card">
       <div class="wall-header-row">
         <div>
@@ -582,6 +544,22 @@
           <!-- Vignettes générées en JS -->
         </div>
       </div>
+    </section>
+
+    <!-- CARTE RDC APRES LE MUR -->
+    <section class="map-card">
+      <div class="map-header">
+        <div>
+          <div class="map-title">Carte des engagements – RDC</div>
+          <div class="map-sub">
+            Chaque point agrège les engagements par province (à partir des données KoboToolbox).
+          </div>
+        </div>
+        <div style="font-size:11px; color:var(--text-muted);">
+          Zoomez et déplacez la carte pour explorer
+        </div>
+      </div>
+      <div id="rdc-map"></div>
     </section>
 
     <div class="footer-note">
@@ -605,6 +583,7 @@
 
     const wallGrid = document.getElementById("wall-grid");
     const wallCount = document.getElementById("wall-count");
+    const wallScroll = document.querySelector(".wall-scroll");
 
     const kpiJem = document.getElementById("kpi-jemengage");
     const kpiNon = document.getElementById("kpi-nonviolences");
@@ -628,21 +607,45 @@
       province: "",
       sexe: ""
     };
- <!-- CARTE RDC -->
-    <section class="map-card">
-      <div class="map-header">
-        <div>
-          <div class="map-title">Carte des engagements – RDC</div>
-          <div class="map-sub">
-            Chaque point agrège les engagements par province (à partir des données KoboToolbox).
-          </div>
-        </div>
-        <div style="font-size:11px; color:var(--text-muted);">
-          Zoomez et déplacez la carte pour explorer
-        </div>
-      </div>
-      <div id="rdc-map"></div>
-    </section>
+
+    let scrollInterval = null;
+
+    function restartAutoScroll() {
+      if (!wallScroll) return;
+
+      // Stop précédent
+      if (scrollInterval) {
+        clearInterval(scrollInterval);
+        scrollInterval = null;
+      }
+
+      wallScroll.scrollTop = 0;
+
+      // Si le contenu ne dépasse pas, pas besoin de scroll
+      if (wallScroll.scrollHeight <= wallScroll.clientHeight + 1) return;
+
+      scrollInterval = setInterval(() => {
+        wallScroll.scrollTop += 1;
+        // Quand on arrive en bas, on repart du haut
+        if (wallScroll.scrollTop + wallScroll.clientHeight >= wallScroll.scrollHeight - 1) {
+          wallScroll.scrollTop = 0;
+        }
+      }, 50); // vitesse : plus petit = plus rapide
+    }
+
+    if (wallScroll) {
+      wallScroll.addEventListener("mouseenter", () => {
+        if (scrollInterval) {
+          clearInterval(scrollInterval);
+          scrollInterval = null;
+        }
+      });
+
+      wallScroll.addEventListener("mouseleave", () => {
+        restartAutoScroll();
+      });
+    }
+
     // Coordonnées approximatives des provinces de la RDC
     const PROVINCE_COORDS = {
       "Kinshasa":        { lat: -4.325,  lon: 15.322 },
@@ -906,6 +909,7 @@
             Aucun engagement ne correspond aux filtres sélectionnés.
           </div>
         `;
+        restartAutoScroll();
         return;
       }
 
@@ -960,6 +964,9 @@
 
         wallGrid.appendChild(tile);
       }
+
+      // Relance le défilement automatique après rendu
+      restartAutoScroll();
     }
 
     filterSticker.addEventListener("change", () => {
