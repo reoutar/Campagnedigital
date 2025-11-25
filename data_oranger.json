@@ -796,5 +796,89 @@
     "province": "Kinshasa",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-11-25T12:47:11"
+  },
+  {
+    "_id": 614571715,
+    "stickers": "nonviolences pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T12:49:35"
+  },
+  {
+    "_id": 614575312,
+    "stickers": "jemengage nonviolences pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T12:53:25"
+  },
+  {
+    "_id": 614583030,
+    "stickers": "nonviolences",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T13:01:53"
+  },
+  {
+    "_id": 614584790,
+    "stickers": "jemengage pasdexcuse nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T13:03:41"
+  },
+  {
+    "_id": 614587586,
+    "stickers": "jemengage nonviolences pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T13:06:14"
+  },
+  {
+    "_id": 614588818,
+    "stickers": "nonviolences",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T13:07:39"
+  },
+  {
+    "_id": 614593980,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T13:11:55"
+  },
+  {
+    "_id": 614595676,
+    "stickers": "jemengage pasdexcuse nonviolences",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T13:13:52"
+  },
+  {
+    "_id": 614596716,
+    "stickers": "pasdexcuse jemengage",
+    "province": "Haut_Uele",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T13:15:01"
+  },
+  {
+    "_id": 614609129,
+    "stickers": "pasdexcuse nonviolences jemengage",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T13:26:59"
+  },
+  {
+    "_id": 614611948,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T13:29:28"
+  },
+  {
+    "_id": 614612270,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T13:29:47"
   }
 ]
