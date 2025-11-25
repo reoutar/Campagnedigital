@@ -1209,5 +1209,75 @@
     "province": "Nord-Kivu",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-11-25T15:39:29"
+  },
+  {
+    "_id": 614747589,
+    "stickers": "nonviolences",
+    "province": "Haut-Uele",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T15:48:47"
+  },
+  {
+    "_id": 614748293,
+    "stickers": "pasdexcuse",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T15:49:29"
+  },
+  {
+    "_id": 614752238,
+    "stickers": "pasdexcuse",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T15:54:32"
+  },
+  {
+    "_id": 614754069,
+    "stickers": "pasdexcuse jemengage",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T15:56:19"
+  },
+  {
+    "_id": 614755622,
+    "stickers": "jemengage",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T15:57:55"
+  },
+  {
+    "_id": 614774330,
+    "stickers": "jemengage pasdexcuse nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T16:17:06"
+  },
+  {
+    "_id": 614774933,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T16:17:40"
+  },
+  {
+    "_id": 614776202,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T16:19:07"
+  },
+  {
+    "_id": 614778997,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T16:22:45"
+  },
+  {
+    "_id": 614779534,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T16:23:23"
   }
 ]
