@@ -1342,5 +1342,96 @@
     "province": "Kongo-Central",
     "Engagement_sexe": "femme",
     "_submission_time": "2025-11-25T17:33:40"
+  },
+  {
+    "_id": 614849720,
+    "stickers": "jemengage",
+    "province": "Haut-Uele",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T17:51:24"
+  },
+  {
+    "_id": 614856839,
+    "stickers": "pasdexcuse jemengage nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T18:03:51"
+  },
+  {
+    "_id": 614860205,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T18:08:23"
+  },
+  {
+    "_id": 614864674,
+    "stickers": "nonviolences",
+    "province": "Haut-Katanga",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T18:15:12"
+  },
+  {
+    "_id": 614865235,
+    "stickers": "nonviolences jemengage pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T18:16:11"
+  },
+  {
+    "_id": 614865511,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T18:16:39"
+  },
+  {
+    "_id": 614865614,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T18:16:54"
+  },
+  {
+    "_id": 614868700,
+    "stickers": "jemengage",
+    "province": "Kongo-Central",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T18:21:22"
+  },
+  {
+    "_id": 614868996,
+    "stickers": "jemengage nonviolences pasdexcuse",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T18:21:53"
+  },
+  {
+    "_id": 614869018,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T18:21:55"
+  },
+  {
+    "_id": 614869300,
+    "stickers": "nonviolences",
+    "province": "Kongo-Central",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-25T18:22:31"
+  },
+  {
+    "_id": 614874240,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T18:31:34"
+  },
+  {
+    "_id": 614874424,
+    "stickers": "nonviolences",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-25T18:31:58"
   }
 ]
