@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <title>16 JOURS D'ACTIVISME– ENGAGEMENT DIGITAL CONTRE LES VIOLENCES FAITES AUX FEMMES ET FILLES</title>
+  <title>16 JOURS D'ACTIVISME – Engagement digital contre les violences faites aux femmes et filles</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <!-- Leaflet CSS & JS -->
@@ -241,44 +241,6 @@
       color: var(--text-muted);
     }
 
-    /* MAP CARD */
-    .map-card {
-      background:
-        radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 60%),
-        radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.16), transparent 60%),
-        linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
-      border-radius: var(--radius-xl);
-      padding: 10px 12px;
-      border: 1px solid rgba(148, 163, 184, 0.8);
-      margin-bottom: 12px;
-    }
-
-    .map-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 6px;
-      gap: 6px;
-    }
-
-    .map-title {
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .map-sub {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    #rdc-map {
-      width: 100%;
-      height: 260px;
-      border-radius: var(--radius-md);
-      border: 1px solid rgba(51, 65, 85, 0.9);
-      overflow: hidden;
-    }
-
     /* WALL */
     .wall-card {
       background:
@@ -323,7 +285,8 @@
       padding: 6px;
       background: radial-gradient(circle at top, rgba(15, 23, 42, 0.96), rgba(2, 6, 23, 0.98));
       max-height: 320px;
-      overflow-y: auto;
+      overflow: hidden; /* important pour l'auto-scroll */
+      position: relative;
     }
 
     .wall-grid {
@@ -411,6 +374,44 @@
       text-align: right;
     }
 
+    /* MAP CARD */
+    .map-card {
+      background:
+        radial-gradient(circle at top left, rgba(59, 130, 246, 0.18), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(245, 158, 11, 0.16), transparent 60%),
+        linear-gradient(145deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
+      border-radius: var(--radius-xl);
+      padding: 10px 12px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      margin-bottom: 12px;
+    }
+
+    .map-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+      gap: 6px;
+    }
+
+    .map-title {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .map-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    #rdc-map {
+      width: 100%;
+      height: 260px;
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      overflow: hidden;
+    }
+
     .footer-note {
       font-size: 10px;
       color: var(--text-muted);
@@ -419,7 +420,7 @@
       margin-bottom: 8px;
     }
 
-    /* ---------- STYLES SPÉCIAUX IMPRESSION / PDF ---------- */
+    /* ---------- STYLES IMPRESSION / PDF ---------- */
 
     @page {
       size: A4 portrait;
@@ -465,9 +466,9 @@
   <div class="page">
     <!-- HEADER -->
     <header class="header">
-      <div class="header-title">16 JOURS D'ACTIVISME– ENGAGEMENT DIGITAL CONTRE LES VIOLENCES FAITES AUX FEMMES ET FILLES</div>
+      <div class="header-title">16 JOURS D'ACTIVISME – ENGAGEMENT DIGITAL CONTRE LES VIOLENCES FAITES AUX FEMMES ET FILLES</div>
       <div class="header-sub">
-        Ensemble luttons contre les violences numériques faites aux femmes et aux filles en RDC 
+        Ensemble luttons contre les violences numériques faites aux femmes et aux filles en RDC
       </div>
       <div class="header-tags">
         <span class="tag">
@@ -560,7 +561,7 @@
       </div>
     </section>
 
-    <!-- MUR D'ENGAGEMENTS AVANT LA CARTE -->
+    <!-- MUR DES ENGAGEMENTS (AVANT LA CARTE) -->
     <section class="wall-card">
       <div class="wall-header-row">
         <div>
@@ -581,13 +582,13 @@
       </div>
     </section>
 
-    <!-- CARTE RDC APRES LE MUR -->
+    <!-- CARTE RDC -->
     <section class="map-card">
       <div class="map-header">
         <div>
           <div class="map-title">Carte des engagements – RDC</div>
           <div class="map-sub">
-            Chaque point agrège les engagements par province (à partir des données KoboToolbox).
+            Polygones ADM1 + points agrégés par province à partir des données KoboToolbox.
           </div>
         </div>
         <div style="font-size:11px; color:var(--text-muted);">
@@ -602,452 +603,459 @@
     </div>
   </div>
 
-<script>
-  // URL des images des stickers (repo GitHub)
-  const STICKER_IMAGES = {
-    "jemengage": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/Jemengage.png",
-    "nonviolences": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/NonViolence.png",
-    "pasdexcuse": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/PasExcuse.png"
-  };
+  <script>
+    // URL des images des stickers (repo GitHub)
+    const STICKER_IMAGES = {
+      "jemengage": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/Jemengage.png",
+      "nonviolences": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/NonViolence.png",
+      "pasdexcuse": "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/images/PasExcuse.png"
+    };
 
-  const STICKER_LABELS = {
-    "jemengage": "#Jem'engage",
-    "nonviolences": "#NonViolences",
-    "pasdexcuse": "#PasD'Excuse"
-  };
+    const STICKER_LABELS = {
+      "jemengage": "#Jem'engage",
+      "nonviolences": "#NonViolences",
+      "pasdexcuse": "#PasD'Excuse"
+    };
 
-  const wallGrid = document.getElementById("wall-grid");
-  const wallCount = document.getElementById("wall-count");
-  const wallScroll = document.querySelector(".wall-scroll");
+    const wallGrid = document.getElementById("wall-grid");
+    const wallCount = document.getElementById("wall-count");
+    const wallScroll = document.querySelector(".wall-scroll");
 
-  const kpiJem = document.getElementById("kpi-jemengage");
-  const kpiNon = document.getElementById("kpi-nonviolences");
-  const kpiPas = document.getElementById("kpi-pasdexcuse");
-  const kpiTotal = document.getElementById("kpi-total");
+    const kpiJem = document.getElementById("kpi-jemengage");
+    const kpiNon = document.getElementById("kpi-nonviolences");
+    const kpiPas = document.getElementById("kpi-pasdexcuse");
+    const kpiTotal = document.getElementById("kpi-total");
 
-  const filterSticker = document.getElementById("filter-sticker");
-  const filterProvince = document.getElementById("filter-province");
-  const filterSexe = document.getElementById("filter-sexe");
-  const filterSummary = document.getElementById("filter-summary");
+    const filterSticker = document.getElementById("filter-sticker");
+    const filterProvince = document.getElementById("filter-province");
+    const filterSexe = document.getElementById("filter-sexe");
+    const filterSummary = document.getElementById("filter-summary");
 
-  let expandedData = [];
-  let stickerStats = {
-    jemengage: 0,
-    nonviolences: 0,
-    pasdexcuse: 0
-  };
-
-  const currentFilters = {
-    sticker: "",
-    province: "",
-    sexe: ""
-  };
-
-  // --- AUTO SCROLL DU MUR (requestAnimationFrame) ---
-  let scrollRAF = null;
-
-  function autoScrollLoop() {
-    if (!wallScroll) return;
-
-    wallScroll.scrollTop += 0.4; // vitesse (px par frame environ)
-    if (wallScroll.scrollTop + wallScroll.clientHeight >= wallScroll.scrollHeight - 1) {
-      // quand on arrive en bas, on remonte
-      wallScroll.scrollTop = 0;
-    }
-    scrollRAF = requestAnimationFrame(autoScrollLoop);
-  }
-
-  function startAutoScroll() {
-    if (!wallScroll) return;
-    // si le contenu ne dépasse pas, inutile de scroller
-    if (wallScroll.scrollHeight <= wallScroll.clientHeight + 1) return;
-    stopAutoScroll();
-    wallScroll.scrollTop = 0;
-    scrollRAF = requestAnimationFrame(autoScrollLoop);
-  }
-
-  function stopAutoScroll() {
-    if (scrollRAF !== null) {
-      cancelAnimationFrame(scrollRAF);
-      scrollRAF = null;
-    }
-  }
-
-  if (wallScroll) {
-    wallScroll.addEventListener("mouseenter", stopAutoScroll);
-    wallScroll.addEventListener("mouseleave", startAutoScroll);
-  }
-
-  // --- COORDONNÉES RDC ---
-  const PROVINCE_COORDS = {
-    "Kinshasa":        { lat: -4.325,  lon: 15.322 },
-    "Bas-Uele":        { lat: 3.85,    lon: 25.5   },
-    "Equateur":        { lat: 1.5,     lon: 19.5   },
-    "Haut-Katanga":    { lat: -11.6,   lon: 27.5   },
-    "Haut-Lomami":     { lat: -8.2,    lon: 25.2   },
-    "Haut-Uele":       { lat: 3.2,     lon: 28.5   },
-    "Ituri":           { lat: 1.8,     lon: 30.0   },
-    "Kasaï":           { lat: -5.0,    lon: 21.5   },
-    "Kasaï-Central":   { lat: -6.0,    lon: 22.0   },
-    "Kasaï-Oriental":  { lat: -6.5,    lon: 24.0   },
-    "Kongo-Central":   { lat: -5.2,    lon: 13.5   },
-    "Kwango":          { lat: -5.5,    lon: 18.0   },
-    "Kwilu":           { lat: -5.2,    lon: 18.8   },
-    "Lomami":          { lat: -6.5,    lon: 24.5   },
-    "Lualaba":         { lat: -10.6,   lon: 25.0   },
-    "Maï-Ndombe":      { lat: -2.0,    lon: 18.5   },
-    "Maniema":         { lat: -3.0,    lon: 26.5   },
-    "Mongala":         { lat: 2.0,     lon: 21.5   },
-    "Nord-Kivu":       { lat: 0.3,     lon: 29.3   },
-    "Nord-Ubangi":     { lat: 3.6,     lon: 20.8   },
-    "Sankuru":         { lat: -2.5,    lon: 24.0   },
-    "Sud-Kivu":        { lat: -3.0,    lon: 28.8   },
-    "Sud-Ubangi":      { lat: 2.6,     lon: 19.8   },
-    "Tanganyika":      { lat: -6.0,    lon: 27.8   },
-    "Tshopo":          { lat: 1.0,     lon: 25.0   },
-    "Tshuapa":         { lat: -0.5,    lon: 22.0   }
-  };
-
-  let map;
-  let provinceLayerGroup;
-
-  function initMap() {
-    const mapContainer = document.getElementById("rdc-map");
-    if (!mapContainer) return;
-
-    map = L.map("rdc-map", {
-      zoomControl: true,
-      attributionControl: false
-    }).setView([-2.5, 23.5], 5);
-
-    // 👉 OPTION : nouveau type de carte (fond sombre CartoDB par ex.)
-    L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
-      maxZoom: 10,
-      minZoom: 3
-    }).addTo(map);
-
-    provinceLayerGroup = L.layerGroup().addTo(map);
-
-    // 👉 (optionnel) chargement futur d'un GeoJSON RDC (voir plus bas)
-    // loadRdcGeojson();
-  }
-
-  function updateMapFromData() {
-    if (!map || !provinceLayerGroup) return;
-
-    provinceLayerGroup.clearLayers();
-
-    const countsByProvince = {};
-    for (const row of expandedData) {
-      const p = row.province || "";
-      if (!p) continue;
-      countsByProvince[p] = (countsByProvince[p] || 0) + 1;
-    }
-
-    for (const [province, count] of Object.entries(countsByProvince)) {
-      const coords = PROVINCE_COORDS[province];
-      if (!coords) continue;
-
-      const radius = Math.min(24, Math.max(6, 6 + Math.sqrt(count) * 3));
-
-      const circle = L.circleMarker([coords.lat, coords.lon], {
-        radius: radius,
-        color: "#f97316",
-        weight: 1,
-        fillColor: "#fb923c",
-        fillOpacity: 0.8
-      });
-
-      circle.bindPopup(
-        `<strong>${province}</strong><br/>${count} engagement(s)`
-      );
-
-      circle.addTo(provinceLayerGroup);
-    }
-  }
-
-  // (optionnel) Exemple de chargement d'un shapefile converti en GeoJSON
-  async function loadRdcGeojson() {
-    try {
-      const resp = await fetch(
-        "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/geodata/rdc_provinces.geojson"
-      );
-      if (!resp.ok) return;
-
-      const geojson = await resp.json();
-      L.geoJSON(geojson, {
-        style: {
-          color: "#f97316",
-          weight: 1,
-          fillColor: "#0b3b70",
-          fillOpacity: 0.15
-        }
-      }).addTo(map);
-    } catch (e) {
-      console.error("Erreur chargement GeoJSON RDC:", e);
-    }
-  }
-
-  async function loadData() {
-    try {
-      const resp = await fetch(
-        "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/data_oranger.json?nocache=" + Date.now()
-      );
-
-      if (!resp.ok) {
-        throw new Error("HTTP " + resp.status);
-      }
-
-      const json = await resp.json();
-      const rows = Array.isArray(json) ? json : (json.results || []);
-
-      prepareData(rows);
-      populateProvinceFilter();
-      updateKpis();
-
-      if (!map) {
-        initMap();
-      }
-      updateMapFromData();
-
-      renderWall();
-    } catch (e) {
-      console.error("Erreur chargement data_oranger.json:", e);
-      wallGrid.innerHTML = `
-        <div style="grid-column: 1 / -1; font-size: 12px; color: #fca5a5;">
-          ⚠️ Erreur lors du chargement des données.<br/>
-          Vérifiez que <code>data_oranger.json</code> existe bien dans le dépôt et contient un JSON valide.
-        </div>
-      `;
-    }
-  }
-
-  function prepareData(rows) {
-    expandedData = [];
-    stickerStats = {
+    let expandedData = [];
+    let stickerStats = {
       jemengage: 0,
       nonviolences: 0,
       pasdexcuse: 0
     };
 
-    for (const row of rows) {
-      let raw = row.stickers;
-      let codesList = [];
+    const currentFilters = {
+      sticker: "",
+      province: "",
+      sexe: ""
+    };
 
-      if (Array.isArray(raw)) {
-        codesList = raw;
-      } else if (typeof raw === "string") {
-        raw = raw.trim();
-        if (raw) {
-          codesList = raw.split(/\s+/g);
+    // --- AUTO-SCROLL DU MUR AVEC requestAnimationFrame ---
+    let scrollRAF = null;
+
+    function autoScrollLoop() {
+      if (!wallScroll) return;
+
+      wallScroll.scrollTop += 0.5; // vitesse du scroll (px/frame)
+      if (wallScroll.scrollTop + wallScroll.clientHeight >= wallScroll.scrollHeight - 1) {
+        wallScroll.scrollTop = 0;
+      }
+      scrollRAF = requestAnimationFrame(autoScrollLoop);
+    }
+
+    function startAutoScroll() {
+      if (!wallScroll) return;
+      if (wallScroll.scrollHeight <= wallScroll.clientHeight + 1) return; // rien à scroller
+      stopAutoScroll();
+      wallScroll.scrollTop = 0;
+      scrollRAF = requestAnimationFrame(autoScrollLoop);
+    }
+
+    function stopAutoScroll() {
+      if (scrollRAF !== null) {
+        cancelAnimationFrame(scrollRAF);
+        scrollRAF = null;
+      }
+    }
+
+    if (wallScroll) {
+      wallScroll.addEventListener("mouseenter", stopAutoScroll);
+      wallScroll.addEventListener("mouseleave", startAutoScroll);
+    }
+
+    // Coordonnées approximatives des provinces de la RDC (pour les cercles agrégés)
+    const PROVINCE_COORDS = {
+      "Kinshasa":        { lat: -4.325,  lon: 15.322 },
+      "Bas-Uele":        { lat: 3.85,    lon: 25.5   },
+      "Equateur":        { lat: 1.5,     lon: 19.5   },
+      "Haut-Katanga":    { lat: -11.6,   lon: 27.5   },
+      "Haut-Lomami":     { lat: -8.2,    lon: 25.2   },
+      "Haut-Uele":       { lat: 3.2,     lon: 28.5   },
+      "Ituri":           { lat: 1.8,     lon: 30.0   },
+      "Kasaï":           { lat: -5.0,    lon: 21.5   },
+      "Kasaï-Central":   { lat: -6.0,    lon: 22.0   },
+      "Kasaï-Oriental":  { lat: -6.5,    lon: 24.0   },
+      "Kongo-Central":   { lat: -5.2,    lon: 13.5   },
+      "Kwango":          { lat: -5.5,    lon: 18.0   },
+      "Kwilu":           { lat: -5.2,    lon: 18.8   },
+      "Lomami":          { lat: -6.5,    lon: 24.5   },
+      "Lualaba":         { lat: -10.6,   lon: 25.0   },
+      "Maï-Ndombe":      { lat: -2.0,    lon: 18.5   },
+      "Maniema":         { lat: -3.0,    lon: 26.5   },
+      "Mongala":         { lat: 2.0,     lon: 21.5   },
+      "Nord-Kivu":       { lat: 0.3,     lon: 29.3   },
+      "Nord-Ubangi":     { lat: 3.6,     lon: 20.8   },
+      "Sankuru":         { lat: -2.5,    lon: 24.0   },
+      "Sud-Kivu":        { lat: -3.0,    lon: 28.8   },
+      "Sud-Ubangi":      { lat: 2.6,     lon: 19.8   },
+      "Tanganyika":      { lat: -6.0,    lon: 27.8   },
+      "Tshopo":          { lat: 1.0,     lon: 25.0   },
+      "Tshuapa":         { lat: -0.5,    lon: 22.0   }
+    };
+
+    let map;
+    let provinceLayerGroup;
+
+    function initMap() {
+      const mapContainer = document.getElementById("rdc-map");
+      if (!mapContainer) return;
+
+      map = L.map("rdc-map", {
+        zoomControl: true,
+        attributionControl: false
+      }).setView([-2.5, 23.5], 5);
+
+      // Fond de carte sombre (tu peux remettre OSM si tu veux)
+      L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+        maxZoom: 10,
+        minZoom: 3
+      }).addTo(map);
+
+      provinceLayerGroup = L.layerGroup().addTo(map);
+
+      // Charge le GeoJSON ADM1 de la RDC (fichier à mettre à côté du HTML)
+      loadRdcAdm1();
+    }
+
+    async function loadRdcAdm1() {
+      try {
+        // ⚠️ Assure-toi que le nom du fichier correspond :
+        // par exemple cod_admbnda_adm1_rgc_itos_20190911.json
+        const resp = await fetch("cod_admbnda_adm1_rgc_itos_20190911.json");
+        if (!resp.ok) {
+          console.warn("GeoJSON RDC introuvable ou HTTP != 200");
+          return;
         }
-      } else if (raw != null) {
-        const s = String(raw).trim();
-        if (s) {
-          codesList = s.split(/\s+/g);
-        }
+
+        const geojson = await resp.json();
+        L.geoJSON(geojson, {
+          style: {
+            color: "#f97316",
+            weight: 1,
+            fillColor: "#0b3b70",
+            fillOpacity: 0.1
+          },
+          onEachFeature: function (feature, layer) {
+            const name =
+              feature.properties.ADM1_FR ||
+              feature.properties.ADM1_EN ||
+              feature.properties.ADM1_PCODE ||
+              "Province";
+            layer.bindPopup(name);
+          }
+        }).addTo(map);
+      } catch (e) {
+        console.error("Erreur chargement GeoJSON RDC:", e);
+      }
+    }
+
+    function updateMapFromData() {
+      if (!map || !provinceLayerGroup) return;
+
+      provinceLayerGroup.clearLayers();
+
+      const countsByProvince = {};
+      for (const row of expandedData) {
+        const p = row.province || "";
+        if (!p) continue;
+        countsByProvince[p] = (countsByProvince[p] || 0) + 1;
       }
 
-      if (!codesList.length) {
-        for (const v of Object.values(row)) {
-          if (typeof v === "string" && /(jemengage|nonviolences|pasdexcuse)/i.test(v)) {
-            codesList = v.trim().split(/\s+/g);
-            break;
+      for (const [province, count] of Object.entries(countsByProvince)) {
+        const coords = PROVINCE_COORDS[province];
+        if (!coords) continue;
+
+        const radius = Math.min(24, Math.max(6, 6 + Math.sqrt(count) * 3));
+
+        const circle = L.circleMarker([coords.lat, coords.lon], {
+          radius: radius,
+          color: "#f97316",
+          weight: 1,
+          fillColor: "#fb923c",
+          fillOpacity: 0.8
+        });
+
+        circle.bindPopup(
+          `<strong>${province}</strong><br/>${count} engagement(s)`
+        );
+
+        circle.addTo(provinceLayerGroup);
+      }
+    }
+
+    async function loadData() {
+      try {
+        const resp = await fetch(
+          "https://raw.githubusercontent.com/reoutar/Campagnedigital/main/data_oranger.json?nocache=" + Date.now()
+        );
+
+        if (!resp.ok) {
+          throw new Error("HTTP " + resp.status);
+        }
+
+        const json = await resp.json();
+        const rows = Array.isArray(json) ? json : (json.results || []);
+
+        prepareData(rows);
+        populateProvinceFilter();
+        updateKpis();
+
+        if (!map) {
+          initMap();
+        }
+        updateMapFromData();
+
+        renderWall();
+      } catch (e) {
+        console.error("Erreur chargement data_oranger.json:", e);
+        wallGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; font-size: 12px; color: #fca5a5;">
+            ⚠️ Erreur lors du chargement des données.<br/>
+            Vérifiez que <code>data_oranger.json</code> existe bien dans le dépôt et contient un JSON valide.
+          </div>
+        `;
+      }
+    }
+
+    function prepareData(rows) {
+      expandedData = [];
+      stickerStats = {
+        jemengage: 0,
+        nonviolences: 0,
+        pasdexcuse: 0
+      };
+
+      for (const row of rows) {
+        let raw = row.stickers;
+        let codesList = [];
+
+        if (Array.isArray(raw)) {
+          codesList = raw;
+        } else if (typeof raw === "string") {
+          raw = raw.trim();
+          if (raw) {
+            codesList = raw.split(/\s+/g);
+          }
+        } else if (raw != null) {
+          const s = String(raw).trim();
+          if (s) {
+            codesList = s.split(/\s+/g);
           }
         }
+
+        if (!codesList.length) {
+          for (const v of Object.values(row)) {
+            if (typeof v === "string" && /(jemengage|nonviolences|pasdexcuse)/i.test(v)) {
+              codesList = v.trim().split(/\s+/g);
+              break;
+            }
+          }
+        }
+
+        if (!codesList.length) continue;
+
+        const province = row.province || "";
+        const sexe =
+          row.Engagement_sexe ||
+          row.engagement_sexe ||
+          row["Mon_engagement_contr_iolences_en_tant_que"] ||
+          row["Mon_engagement_contre_les_violences_en_tant_que"] ||
+          row.sexe ||
+          "";
+
+        const submission_time = row._submission_time || row._submitted_at || "";
+
+        for (const s of codesList) {
+          const code = String(s).toLowerCase();
+          if (!code) continue;
+
+          if (code === "jemengage") stickerStats.jemengage += 1;
+          if (code === "nonviolences") stickerStats.nonviolences += 1;
+          if (code === "pasdexcuse") stickerStats.pasdexcuse += 1;
+
+          expandedData.push({
+            _id: row._id,
+            sticker: code,
+            province: province,
+            sexe: sexe,
+            submission_time: submission_time
+          });
+        }
       }
 
-      if (!codesList.length) continue;
+      expandedData.sort((a, b) => {
+        if (!a.submission_time || !b.submission_time) return 0;
+        return a.submission_time < b.submission_time ? 1 : -1;
+      });
+    }
 
-      const province = row.province || "";
-      const sexe =
-        row.Engagement_sexe ||
-        row.engagement_sexe ||
-        row["Mon_engagement_contr_iolences_en_tant_que"] ||
-        row["Mon_engagement_contre_les_violences_en_tant_que"] ||
-        row.sexe ||
-        "";
-
-      const submission_time = row._submission_time || row._submitted_at || "";
-
-      for (const s of codesList) {
-        const code = String(s).toLowerCase();
-        if (!code) continue;
-
-        if (code === "jemengage") stickerStats.jemengage += 1;
-        if (code === "nonviolences") stickerStats.nonviolences += 1;
-        if (code === "pasdexcuse") stickerStats.pasdexcuse += 1;
-
-        expandedData.push({
-          _id: row._id,
-          sticker: code,
-          province: province,
-          sexe: sexe,
-          submission_time: submission_time
-        });
+    function populateProvinceFilter() {
+      const provinces = new Set();
+      for (const row of expandedData) {
+        if (row.province) provinces.add(row.province);
       }
-    }
-
-    expandedData.sort((a, b) => {
-      if (!a.submission_time || !b.submission_time) return 0;
-      return a.submission_time < b.submission_time ? 1 : -1;
-    });
-  }
-
-  function populateProvinceFilter() {
-    const provinces = new Set();
-    for (const row of expandedData) {
-      if (row.province) provinces.add(row.province);
-    }
-    const sorted = Array.from(provinces).sort((a, b) =>
-      a.localeCompare(b, "fr", { sensitivity: "base" })
-    );
-
-    filterProvince.innerHTML = '<option value="">Toutes les provinces</option>';
-    for (const p of sorted) {
-      const opt = document.createElement("option");
-      opt.value = p;
-      opt.textContent = p;
-      filterProvince.appendChild(opt);
-    }
-  }
-
-  function updateKpis() {
-    kpiJem.textContent = stickerStats.jemengage;
-    kpiNon.textContent = stickerStats.nonviolences;
-    kpiPas.textContent = stickerStats.pasdexcuse;
-    kpiTotal.textContent = expandedData.length;
-  }
-
-  function formatShortDate(str) {
-    if (!str) return "";
-    const d = new Date(str);
-    if (isNaN(d)) return "";
-    return d.toLocaleDateString("fr-FR", {
-      day: "2-digit",
-      month: "2-digit"
-    });
-  }
-
-  function buildFilterSummary() {
-    const parts = [];
-    if (currentFilters.sticker) {
-      parts.push("Sticker : " + (STICKER_LABELS[currentFilters.sticker] || currentFilters.sticker));
-    }
-    if (currentFilters.province) {
-      parts.push("Province : " + currentFilters.province);
-    }
-    if (currentFilters.sexe) {
-      parts.push("Sexe : " + currentFilters.sexe);
-    }
-    filterSummary.textContent = parts.length ? parts.join(" · ") : "Aucun filtre appliqué";
-  }
-
-  function renderWall() {
-    let filtered = expandedData.slice();
-
-    if (currentFilters.sticker) {
-      filtered = filtered.filter(r => r.sticker === currentFilters.sticker);
-    }
-    if (currentFilters.province) {
-      filtered = filtered.filter(r => r.province === currentFilters.province);
-    }
-    if (currentFilters.sexe) {
-      filtered = filtered.filter(
-        r => (r.sexe || "").toLowerCase() === currentFilters.sexe.toLowerCase()
+      const sorted = Array.from(provinces).sort((a, b) =>
+        a.localeCompare(b, "fr", { sensitivity: "base" })
       );
+
+      filterProvince.innerHTML = '<option value="">Toutes les provinces</option>';
+      for (const p of sorted) {
+        const opt = document.createElement("option");
+        opt.value = p;
+        opt.textContent = p;
+        filterProvince.appendChild(opt);
+      }
     }
 
-    wallCount.textContent = filtered.length.toString();
-    buildFilterSummary();
-
-    if (filtered.length === 0) {
-      wallGrid.innerHTML = `
-        <div style="grid-column: 1 / -1; font-size: 12px; color: #e5e7eb;">
-          Aucun engagement ne correspond aux filtres sélectionnés.
-        </div>
-      `;
-      stopAutoScroll();
-      return;
+    function updateKpis() {
+      kpiJem.textContent = stickerStats.jemengage;
+      kpiNon.textContent = stickerStats.nonviolences;
+      kpiPas.textContent = stickerStats.pasdexcuse;
+      kpiTotal.textContent = expandedData.length;
     }
 
-    wallGrid.innerHTML = "";
+    function formatShortDate(str) {
+      if (!str) return "";
+      const d = new Date(str);
+      if (isNaN(d)) return "";
+      return d.toLocaleDateString("fr-FR", {
+        day: "2-digit",
+        month: "2-digit"
+      });
+    }
 
-    for (const row of filtered) {
-      const stickerCode = row.sticker;
-      const imgSrc = STICKER_IMAGES[stickerCode] || "";
-      const label = STICKER_LABELS[stickerCode] || stickerCode;
+    function buildFilterSummary() {
+      const parts = [];
+      if (currentFilters.sticker) {
+        parts.push("Sticker : " + (STICKER_LABELS[currentFilters.sticker] || currentFilters.sticker));
+      }
+      if (currentFilters.province) {
+        parts.push("Province : " + currentFilters.province);
+      }
+      if (currentFilters.sexe) {
+        parts.push("Sexe : " + currentFilters.sexe);
+      }
+      filterSummary.textContent = parts.length ? parts.join(" · ") : "Aucun filtre appliqué";
+    }
 
-      const tile = document.createElement("article");
-      tile.className = "tile";
+    function renderWall() {
+      let filtered = expandedData.slice();
 
-      const badge = document.createElement("div");
-      badge.className = "tile-badge";
-      badge.innerHTML = `<span class="badge-dot"></span><span>${label}</span>`;
-      tile.appendChild(badge);
-
-      const imgWrap = document.createElement("div");
-      imgWrap.className = "tile-image-wrap";
-
-      if (imgSrc) {
-        const img = document.createElement("img");
-        img.className = "tile-image";
-        img.src = imgSrc;
-        img.alt = label;
-        imgWrap.appendChild(img);
-      } else {
-        imgWrap.innerHTML = `<div style="font-size:11px; color:#6b7280; padding:6px; text-align:center;">
-          ${label}
-        </div>`;
+      if (currentFilters.sticker) {
+        filtered = filtered.filter(r => r.sticker === currentFilters.sticker);
+      }
+      if (currentFilters.province) {
+        filtered = filtered.filter(r => r.province === currentFilters.province);
+      }
+      if (currentFilters.sexe) {
+        filtered = filtered.filter(
+          r => (r.sexe || "").toLowerCase() === currentFilters.sexe.toLowerCase()
+        );
       }
 
-      tile.appendChild(imgWrap);
+      wallCount.textContent = filtered.length.toString();
+      buildFilterSummary();
 
-      const meta = document.createElement("div");
-      meta.className = "tile-meta";
+      if (filtered.length === 0) {
+        wallGrid.innerHTML = `
+          <div style="grid-column: 1 / -1; font-size: 12px; color: #e5e7eb;">
+            Aucun engagement ne correspond aux filtres sélectionnés.
+          </div>
+        `;
+        stopAutoScroll();
+        return;
+      }
 
-      const left = document.createElement("div");
-      left.innerHTML = `
-        <div class="tile-province">${row.province || "Province inconnue"}</div>
-        <div class="tile-sex">${row.sexe || "&nbsp;"}</div>
-      `;
+      wallGrid.innerHTML = "";
 
-      const right = document.createElement("div");
-      right.className = "tile-time";
-      right.textContent = formatShortDate(row.submission_time);
+      for (const row of filtered) {
+        const stickerCode = row.sticker;
+        const imgSrc = STICKER_IMAGES[stickerCode] || "";
+        const label = STICKER_LABELS[stickerCode] || stickerCode;
 
-      meta.appendChild(left);
-      meta.appendChild(right);
-      tile.appendChild(meta);
+        const tile = document.createElement("article");
+        tile.className = "tile";
 
-      wallGrid.appendChild(tile);
+        const badge = document.createElement("div");
+        badge.className = "tile-badge";
+        badge.innerHTML = `<span class="badge-dot"></span><span>${label}</span>`;
+        tile.appendChild(badge);
+
+        const imgWrap = document.createElement("div");
+        imgWrap.className = "tile-image-wrap";
+
+        if (imgSrc) {
+          const img = document.createElement("img");
+          img.className = "tile-image";
+          img.src = imgSrc;
+          img.alt = label;
+          imgWrap.appendChild(img);
+        } else {
+          imgWrap.innerHTML = `<div style="font-size:11px; color:#6b7280; padding:6px; text-align:center;">
+            ${label}
+          </div>`;
+        }
+
+        tile.appendChild(imgWrap);
+
+        const meta = document.createElement("div");
+        meta.className = "tile-meta";
+
+        const left = document.createElement("div");
+        left.innerHTML = `
+          <div class="tile-province">${row.province || "Province inconnue"}</div>
+          <div class="tile-sex">${row.sexe || "&nbsp;"}</div>
+        `;
+
+        const right = document.createElement("div");
+        right.className = "tile-time";
+        right.textContent = formatShortDate(row.submission_time);
+
+        meta.appendChild(left);
+        meta.appendChild(right);
+        tile.appendChild(meta);
+
+        wallGrid.appendChild(tile);
+      }
+
+      // Lancer / relancer le défilement automatique
+      startAutoScroll();
     }
 
-    // relance le défilement quand le contenu a été recréé
-    startAutoScroll();
-  }
+    if (filterSticker) {
+      filterSticker.addEventListener("change", () => {
+        currentFilters.sticker = filterSticker.value;
+        renderWall();
+      });
+    }
+    if (filterProvince) {
+      filterProvince.addEventListener("change", () => {
+        currentFilters.province = filterProvince.value;
+        renderWall();
+      });
+    }
+    if (filterSexe) {
+      filterSexe.addEventListener("change", () => {
+        currentFilters.sexe = filterSexe.value;
+        renderWall();
+      });
+    }
 
-  if (filterSticker) {
-    filterSticker.addEventListener("change", () => {
-      currentFilters.sticker = filterSticker.value;
-      renderWall();
-    });
-  }
-  if (filterProvince) {
-    filterProvince.addEventListener("change", () => {
-      currentFilters.province = filterProvince.value;
-      renderWall();
-    });
-  }
-  if (filterSexe) {
-    filterSexe.addEventListener("change", () => {
-      currentFilters.sexe = filterSexe.value;
-      renderWall();
-    });
-  }
-
-  loadData();
-</script>
-
+    loadData();
+  </script>
 </body>
 </html>
