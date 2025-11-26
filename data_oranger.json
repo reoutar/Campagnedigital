@@ -1804,5 +1804,33 @@
     "province": "Nord-Kivu",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-11-26T10:47:59"
+  },
+  {
+    "_id": 615390599,
+    "stickers": "pasdexcuse",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-26T10:51:20"
+  },
+  {
+    "_id": 615404456,
+    "stickers": "nonviolences pasdexcuse jemengage",
+    "province": "Sud-Kivu",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-26T11:04:48"
+  },
+  {
+    "_id": 615406978,
+    "stickers": "jemengage nonviolences pasdexcuse",
+    "province": "Sud-Kivu",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-26T11:06:54"
+  },
+  {
+    "_id": 615416276,
+    "stickers": "nonviolences",
+    "province": "Sud-Kivu",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-26T11:14:48"
   }
 ]
