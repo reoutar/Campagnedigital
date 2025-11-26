@@ -1755,5 +1755,19 @@
     "province": "Haut-Uele",
     "Engagement_sexe": "femme",
     "_submission_time": "2025-11-26T08:02:31"
+  },
+  {
+    "_id": 615269490,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-26T09:00:38"
+  },
+  {
+    "_id": 615270014,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-26T09:01:09"
   }
 ]
