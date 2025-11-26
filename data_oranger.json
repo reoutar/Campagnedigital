@@ -1839,5 +1839,26 @@
     "province": "Maniema",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-11-26T12:44:10"
+  },
+  {
+    "_id": 615517972,
+    "stickers": "pasdexcuse jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-26T13:08:38"
+  },
+  {
+    "_id": 615537635,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-26T13:31:10"
+  },
+  {
+    "_id": 615538504,
+    "stickers": "pasdexcuse jemengage nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-26T13:31:58"
   }
 ]
