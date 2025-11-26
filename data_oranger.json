@@ -1685,5 +1685,19 @@
     "province": "Kasai-Oriental",
     "Engagement_sexe": "femme",
     "_submission_time": "2025-11-26T03:30:05"
+  },
+  {
+    "_id": 615081755,
+    "stickers": "jemengage",
+    "province": "Sud-Kivu",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-26T04:04:25"
+  },
+  {
+    "_id": 615088694,
+    "stickers": "nonviolences",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-26T04:24:18"
   }
 ]
