@@ -2623,5 +2623,82 @@
     "province": "Kinshasa",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-11-27T20:51:30"
+  },
+  {
+    "_id": 616740382,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-27T20:55:04"
+  },
+  {
+    "_id": 616741223,
+    "stickers": "pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-27T20:57:03"
+  },
+  {
+    "_id": 616744530,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-27T21:03:06"
+  },
+  {
+    "_id": 616745956,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-27T21:06:08"
+  },
+  {
+    "_id": 616746508,
+    "stickers": "nonviolences",
+    "province": "Kasai-Central",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-27T21:07:33"
+  },
+  {
+    "_id": 616747172,
+    "stickers": "pasdexcuse nonviolences jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-27T21:09:48"
+  },
+  {
+    "_id": 616747352,
+    "stickers": "nonviolences jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-27T21:10:20"
+  },
+  {
+    "_id": 616747689,
+    "stickers": "jemengage pasdexcuse nonviolences",
+    "province": "Mongala",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-27T21:11:22"
+  },
+  {
+    "_id": 616748518,
+    "stickers": "jemengage",
+    "province": "Kongo-Central",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-27T21:13:26"
+  },
+  {
+    "_id": 616749662,
+    "stickers": "pasdexcuse",
+    "province": "Lualaba",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-27T21:17:21"
+  },
+  {
+    "_id": 616750316,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-27T21:19:06"
   }
 ]
