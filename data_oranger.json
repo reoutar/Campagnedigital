@@ -2588,5 +2588,40 @@
     "province": "Kinshasa",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-11-27T20:40:57"
+  },
+  {
+    "_id": 616734828,
+    "stickers": "jemengage nonviolences pasdexcuse",
+    "province": "Kongo-Central",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-27T20:43:14"
+  },
+  {
+    "_id": 616735912,
+    "stickers": "jemengage pasdexcuse nonviolences",
+    "province": "Kasai-Central",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-27T20:46:19"
+  },
+  {
+    "_id": 616736793,
+    "stickers": "nonviolences",
+    "province": "Mai-Ndombe",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-27T20:48:05"
+  },
+  {
+    "_id": 616737440,
+    "stickers": "jemengage",
+    "province": "Tanganyika",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-27T20:49:25"
+  },
+  {
+    "_id": 616738405,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-27T20:51:30"
   }
 ]
