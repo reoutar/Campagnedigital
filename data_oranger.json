@@ -2147,5 +2147,33 @@
     "province": "Kinshasa",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-11-27T17:17:05"
+  },
+  {
+    "_id": 616621165,
+    "stickers": "pasdexcuse jemengage nonviolences",
+    "province": "Sud-Kivu",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-27T17:24:22"
+  },
+  {
+    "_id": 616624832,
+    "stickers": "pasdexcuse nonviolences jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-27T17:29:47"
+  },
+  {
+    "_id": 616629931,
+    "stickers": "jemengage pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-27T17:38:10"
+  },
+  {
+    "_id": 616631741,
+    "stickers": "jemengage pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-27T17:40:39"
   }
 ]
