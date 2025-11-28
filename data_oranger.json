@@ -3120,5 +3120,33 @@
     "province": "Kinshasa",
     "Engagement_sexe": "femme",
     "_submission_time": "2025-11-28T07:25:53"
+  },
+  {
+    "_id": 616950104,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-28T07:28:53"
+  },
+  {
+    "_id": 616950943,
+    "stickers": "jemengage",
+    "province": "Ituri",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-28T07:30:14"
+  },
+  {
+    "_id": 616951181,
+    "stickers": "jemengage",
+    "province": "Sankuru",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-28T07:30:44"
+  },
+  {
+    "_id": 616954932,
+    "stickers": "nonviolences",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-28T07:36:37"
   }
 ]
