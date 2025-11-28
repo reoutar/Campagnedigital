@@ -3841,5 +3841,26 @@
     "province": "Lualaba",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-11-28T17:36:54"
+  },
+  {
+    "_id": 617527574,
+    "stickers": "nonviolences jemengage pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-28T19:43:28"
+  },
+  {
+    "_id": 617529393,
+    "stickers": "pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-28T19:46:20"
+  },
+  {
+    "_id": 617529970,
+    "stickers": "jemengage pasdexcuse nonviolences",
+    "province": "Kwilu",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-11-28T19:47:05"
   }
 ]
