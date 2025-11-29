@@ -4093,5 +4093,19 @@
     "province": "Nord-Kivu",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-11-29T17:41:14"
+  },
+  {
+    "_id": 618211152,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-29T21:14:36"
+  },
+  {
+    "_id": 618212004,
+    "stickers": "nonviolences",
+    "province": "Kongo-Central",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-11-29T21:18:43"
   }
 ]
