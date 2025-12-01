@@ -4380,5 +4380,26 @@
     "province": "Nord-Ubangi",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-12-01T09:23:35"
+  },
+  {
+    "_id": 619129051,
+    "stickers": "nonviolences pasdexcuse jemengage",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T09:56:35"
+  },
+  {
+    "_id": 619129968,
+    "stickers": "nonviolences jemengage pasdexcuse",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T09:57:38"
+  },
+  {
+    "_id": 619155958,
+    "stickers": "nonviolences jemengage",
+    "province": "Tshuapa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-12-01T10:26:45"
   }
 ]
