@@ -4247,5 +4247,124 @@
     "province": "Kinshasa",
     "Engagement_sexe": "femme",
     "_submission_time": "2025-11-30T22:34:36"
+  },
+  {
+    "_id": 618876092,
+    "stickers": "jemengage",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T03:59:09"
+  },
+  {
+    "_id": 618876824,
+    "stickers": "nonviolences jemengage",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:01:34"
+  },
+  {
+    "_id": 618877138,
+    "stickers": "pasdexcuse nonviolences jemengage",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:02:22"
+  },
+  {
+    "_id": 618877402,
+    "stickers": "jemengage pasdexcuse nonviolences",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:03:00"
+  },
+  {
+    "_id": 618877721,
+    "stickers": "pasdexcuse nonviolences jemengage",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:03:36"
+  },
+  {
+    "_id": 618877952,
+    "stickers": "nonviolences jemengage pasdexcuse",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:04:04"
+  },
+  {
+    "_id": 618878134,
+    "stickers": "jemengage nonviolences pasdexcuse",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:04:23"
+  },
+  {
+    "_id": 618878348,
+    "stickers": "jemengage pasdexcuse nonviolences",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:04:45"
+  },
+  {
+    "_id": 618878516,
+    "stickers": "pasdexcuse nonviolences jemengage",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:05:01"
+  },
+  {
+    "_id": 618878761,
+    "stickers": "jemengage pasdexcuse nonviolences",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:05:27"
+  },
+  {
+    "_id": 618879050,
+    "stickers": "nonviolences jemengage pasdexcuse",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:05:56"
+  },
+  {
+    "_id": 618880086,
+    "stickers": "jemengage nonviolences pasdexcuse",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:08:18"
+  },
+  {
+    "_id": 618880347,
+    "stickers": "jemengage pasdexcuse nonviolences",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:08:51"
+  },
+  {
+    "_id": 618880797,
+    "stickers": "jemengage nonviolences pasdexcuse",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:10:17"
+  },
+  {
+    "_id": 618880885,
+    "stickers": "pasdexcuse nonviolences jemengage",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:10:36"
+  },
+  {
+    "_id": 618881025,
+    "stickers": "nonviolences pasdexcuse jemengage",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:10:56"
+  },
+  {
+    "_id": 618881120,
+    "stickers": "pasdexcuse nonviolences jemengage",
+    "province": "Tshopo",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T04:11:16"
   }
 ]
