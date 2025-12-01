@@ -4737,5 +4737,82 @@
     "province": "Kinshasa",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-12-01T13:18:19"
+  },
+  {
+    "_id": 619327024,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T13:32:12"
+  },
+  {
+    "_id": 619327367,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-12-01T13:32:28"
+  },
+  {
+    "_id": 619328450,
+    "stickers": "nonviolences jemengage pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-12-01T13:33:24"
+  },
+  {
+    "_id": 619328582,
+    "stickers": "pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T13:33:34"
+  },
+  {
+    "_id": 619328714,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T13:33:43"
+  },
+  {
+    "_id": 619328931,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-12-01T13:33:59"
+  },
+  {
+    "_id": 619330079,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-12-01T13:35:08"
+  },
+  {
+    "_id": 619330111,
+    "stickers": "nonviolences pasdexcuse jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T13:35:11"
+  },
+  {
+    "_id": 619330312,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T13:35:25"
+  },
+  {
+    "_id": 619330698,
+    "stickers": "nonviolences pasdexcuse jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T13:35:55"
+  },
+  {
+    "_id": 619331049,
+    "stickers": "pasdexcuse nonviolences jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-01T13:36:16"
   }
 ]
