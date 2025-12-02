@@ -5171,5 +5171,26 @@
     "province": "Tshopo",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-12-02T13:27:28"
+  },
+  {
+    "_id": 620347073,
+    "stickers": "jemengage pasdexcuse nonviolences",
+    "province": "Kasai-Central",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-12-02T15:35:49"
+  },
+  {
+    "_id": 620348902,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-02T15:38:11"
+  },
+  {
+    "_id": 620349260,
+    "stickers": "jemengage pasdexcuse",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-02T15:38:43"
   }
 ]
