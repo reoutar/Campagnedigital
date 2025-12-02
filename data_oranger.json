@@ -5066,5 +5066,19 @@
     "province": "Kinshasa",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-12-02T10:16:31"
+  },
+  {
+    "_id": 620070898,
+    "stickers": "jemengage",
+    "province": "Sud-Kivu",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-02T10:37:44"
+  },
+  {
+    "_id": 620075415,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-12-02T10:42:51"
   }
 ]
