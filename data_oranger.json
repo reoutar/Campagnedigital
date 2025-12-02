@@ -5017,5 +5017,33 @@
     "province": "Kasai",
     "Engagement_sexe": "homme",
     "_submission_time": "2025-12-02T08:33:26"
+  },
+  {
+    "_id": 619947874,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-02T08:41:38"
+  },
+  {
+    "_id": 619948747,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-12-02T08:42:30"
+  },
+  {
+    "_id": 619949090,
+    "stickers": "nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-12-02T08:42:55"
+  },
+  {
+    "_id": 619949899,
+    "stickers": "jemengage pasdexcuse nonviolences",
+    "province": "Kinshasa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-02T08:43:47"
   }
 ]
