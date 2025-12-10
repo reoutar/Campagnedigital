@@ -6298,5 +6298,19 @@
     "province": "Mongala",
     "Engagement_sexe": "femme",
     "_submission_time": "2025-12-10T12:30:34"
+  },
+  {
+    "_id": 626853615,
+    "stickers": "nonviolences jemengage",
+    "province": "Tshuapa",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-10T13:43:13"
+  },
+  {
+    "_id": 626854607,
+    "stickers": "jemengage nonviolences",
+    "province": "Equateur",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-12-10T13:44:16"
   }
 ]
