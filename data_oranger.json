@@ -6277,5 +6277,26 @@
     "province": "Equateur",
     "Engagement_sexe": "femme",
     "_submission_time": "2025-12-09T12:27:55"
+  },
+  {
+    "_id": 626753046,
+    "stickers": "jemengage",
+    "province": "Kinshasa",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-12-10T11:55:59"
+  },
+  {
+    "_id": 626786477,
+    "stickers": "jemengage pasdexcuse nonviolences",
+    "province": "Nord-Kivu",
+    "Engagement_sexe": "homme",
+    "_submission_time": "2025-12-10T12:30:13"
+  },
+  {
+    "_id": 626786747,
+    "stickers": "jemengage pasdexcuse nonviolences",
+    "province": "Mongala",
+    "Engagement_sexe": "femme",
+    "_submission_time": "2025-12-10T12:30:34"
   }
 ]
